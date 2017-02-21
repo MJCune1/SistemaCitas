@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Especialidad;
 use Illuminate\Http\Request;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -14,7 +15,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $medicos = Especialidad::All()->users();
+        $usuarios = User::All();
+        return view ('doctores.index',['usuarios'=>$usuarios]);
 
         
     }

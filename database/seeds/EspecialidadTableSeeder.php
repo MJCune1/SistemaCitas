@@ -12,10 +12,10 @@ class EspecialidadTableSeeder extends Seeder
     public function run()
     {
 
-        DB::table('especialidadades')->insert([
+        DB::table('especialidades')->insert([
 
             'doctor_id'=>'1',
-            'descripicion'=>'Dermatologia',
+            'descripcion'=>'Dermatologia',
             'created_at'=> \Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now(),
 
