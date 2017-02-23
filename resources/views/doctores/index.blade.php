@@ -16,17 +16,16 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Roles</div>
+                    <div class="panel-heading">Usuarios</div>
 
                     <div class="panel-body">
-                        Listado de Usuarios
-
+                        Listado de Medicos
                   {{--@if(Auth::user()->roles[0]->hasPermissionTo('CrearRole') or Auth::user()->can('CrearRole'))
 
                        @endif--}}
 
                             <a href="{{url('usuarios/create')}}" class="btn btn-success">
-                                <i class="fa fa-user"></i> Nuevo Usuario
+                                <i class="fa fa-user"></i> Nuevo Medico
 
 
 
@@ -39,31 +38,25 @@ POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
                         <table class="table table-bordered">
                             <tr>
                                 <th>Nombre</th>
-                                <th>apellido</th>
-                                <th>email</th>
-                                <th>Rol</th>
+                                <th>Apellido</th>
+                                <th>Especialidad</th>
+                                <th>Email</th>
 
 
                                 <th colspan="3" width="10%">Acciones</th>
                             </tr>
+{{--Auth::user()->hasRole('Asministrador')
 
-                            @foreach(Auth::user()->roles[0] as $usuario)
+Auth::user('Administrador') as $user--}}
+                            @foreach($usuarios as $usuario)
                                 <tr>
                                     <td>{{$usuario->nombre}}</td>
                                     <td>{{$usuario->apellido}}</td>
+                                    <td>{{$usuario->especialidad->descripcion}}</td>
                                     <td>{{$usuario->email}}</td>
 
 
-                                    <!--a.btn.btn-primary-->
 
-                                    <td><a href="{{url('/usuarios/'.$usuario->id.'/permisos')}}" class="btn btn-warning">
-                                            <!--i.glaphicon.glaphicon-edit-->
-                                            <i class="fa fa-id-card"></i>
-                                        </a>
-
-
-
-                                    </td>
                                     <td><a href="{{url('/usuarios/'.$usuario->id.'/edit')}}" class="btn btn-primary">
                                             <!--i.glaphicon.glaphicon-edit-->
                                             <i class="fa fa-edit"></i>

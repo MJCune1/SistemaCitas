@@ -14,7 +14,6 @@ class EspecialidadTableSeeder extends Seeder
 
         DB::table('especialidades')->insert([
 
-            'doctor_id'=>'1',
             'descripcion'=>'Dermatologia',
             'created_at'=> \Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now(),

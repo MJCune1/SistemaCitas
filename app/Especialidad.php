@@ -3,16 +3,23 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 
 class Especialidad extends Model
 {
-    protected $fillable = ['id_docior','descrpicion'];
+use HasRoles;
+
+    protected $fillable = ['id','descripcion'];
+    protected $table= 'especialidades';
 
 
 
-    protected function User(){
 
-        $this->HasOne('App\User');
+    public function user(){
+
+        return $this->hasOne('App\User', 'especialidad_id');
 
     }
+
+
 }
