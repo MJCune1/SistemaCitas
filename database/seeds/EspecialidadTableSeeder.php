@@ -19,5 +19,20 @@ class EspecialidadTableSeeder extends Seeder
             'updated_at'=>\Carbon\Carbon::now(),
 
         ]);
+        DB::table('especialidades')->insert([
+
+            'descripcion'=>'Gatroenterologia',
+            'created_at'=> \Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now(),
+
+        ]);
+
+        DB::table('especialidades')->insert([
+
+            'descripcion'=>'Pediatria',
+            'created_at'=> \Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now(),
+
+        ]);
     }
 }

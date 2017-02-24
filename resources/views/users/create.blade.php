@@ -107,11 +107,11 @@
                                 </div>
 
                             <div class="form-group{{$errors->has('espe') ? 'has-error' : ''}}">
-                                <label for="especialidad_id" class="col-md-4 control-label">Especialidad</label>
+                                <label for="especialidad" class="col-md-4 control-label">Especialidad</label>
                                 <div class="col-md-6">
-                                    <select name="especialidad_id" id="especialidad_id" class="form-control" >
+                                    <select name="especialidad" id="especialidad" class="form-control" >
                                         @foreach($espe as $espe)
-                                            <option value="1">{{$espe->descripcion}}</option>
+                                            <option value="{{$espe->id}}">{{$espe->descripcion}}</option>
                                         @endforeach
                                     </select>
                                     @if($errors->has('especialidad'))
@@ -120,6 +120,17 @@
                                     @endif
                                 </div>
                             </div>
+
+                            <!--
+                            Cita
+                            especialidad
+                            medico
+                            fecha
+                            paciente
+                            estatus
+                            ($user->role('medico') as $medico)
+                            -->
+
 
 
                             <div class="form-group">

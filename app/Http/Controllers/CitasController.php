@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Especialidad;
-use App\UserHasRole;
-use Illuminate\Http\Request;
 use App\User;
-use Spatie\Permission\Models\Role;
+use Illuminate\Http\Request;
 use Validator;
+use App\Cita;
 
-
-class UsersController extends Controller
+class CitasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,15 +17,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-
-        $usuarios = User::role('medico')->paginate();
-
-        return view ('doctores.index',['usuarios'=>$usuarios]);
-
-
-
-
-        
+        //
     }
 
     /**
@@ -37,9 +27,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $espe = Especialidad::All();
-        $roles = Role::All();
-        return view('users.create', ['roles'=>$roles], ['espe'=>$espe]);
+        $especialidad = Especialidad::All();
+        $medicos = User::role('medico')->get();
+        $usuarios = User::All();
+        return view('citas.create', ['usuario'=>$usuarios,'medico'=>$medicos, 'especialidad'=>$especialidad]);
     }
 
     /**
@@ -50,17 +41,14 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-
         $v = Validator::make($request->All(), [
 
-            'nombre'=>'required|max:50',
-            'apellido'=>'required|max:50',
-            'cedula'=>'required|max:8|unique:users',
-            'telefono'=>'max:255',
-            'celular'=>'max:255',
-            'email'=>'required|email|max:255|unique:users',
-            'password'=>'required|min:6|confirmed',
-            'role'=>'required',
+            'fecha'=>'max:255',
+            'paciente'=>'required',
+            'estatus'=>'max:255',
+            'especialidad'=>'required',
+            'medico'=>'required|max:50',
+
         ]);
 
         if($v->fails()){
@@ -70,24 +58,19 @@ class UsersController extends Controller
 
 
 
+        $cita=Cita::create([
 
-            $user=User::create([
-
-                'nombre'=>$request->input('nombre'),
-                'apellido'=>$request->input('apellido'),
-                'cedula'=>$request->input('cedula'),
-                'telefono'=>$request->input('telefono'),
-                'celular'=>$request->input('celular'),
-                'email'=>$request->input('email'),
-                'password'=>$request->input('password'),
-                'especialidad_id'=>$request->input('especialidad'),
+            'fecha'=>$request->input('fecha'),
+            'usuario'=>$request->input('paciente'),
+            'estatus'=>$request->input('estatus'),
+            'especialidad'=>$request->input('especialidad'),
+            'medico'=>$request->input('medico'),
 
 
+        ]);
 
-            ]);
 
-
-            $user ->assignRole($request->input('role'));
+   //     $user ->assignRole($request->input('role'));
 
 
 
@@ -95,7 +78,7 @@ class UsersController extends Controller
 
 
 
-}
+    }
 
     /**
      * Display the specified resource.

@@ -19,5 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::resource('/usuarios', 'UsersController');
+Route::resource('/citas', 'CitasController');
+Route::resource('/recipes', 'RecipesController');
 
 

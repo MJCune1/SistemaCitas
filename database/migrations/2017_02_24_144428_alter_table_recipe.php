@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterUsersTable extends Migration
+class AlterTableRecipe extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class AlterUsersTable extends Migration
      */
     public function up()
     {
-        schema::table('users', function (Blueprint $table) {
+        schema::table('recipe', function(Blueprint $table){
 
-            $table->integer('especialidad_id')->nullable()->unsigned();
-            $table->foreign('especialidad_id')->references('id')->on('especialidades');
+            $table->enum('status',['entregado','pendiente']);
+            $table->date('fecha_emision');
+            $table->date('fecha_entrega');
+
         });
     }
 
@@ -27,6 +29,6 @@ class AlterUsersTable extends Migration
      */
     public function down()
     {
-       schema::dropIfExists('users');
+        //
     }
 }
