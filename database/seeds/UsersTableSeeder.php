@@ -18,9 +18,12 @@ class UsersTableSeeder extends Seeder
             'nombre'=>'Juan',
             'apellido'=>'Alvarado',
             'cedula'=>'19292078',
+            'direccion'=>'Av.Fuerzas Armadas',
+            'sexo'=>'masculino',
+            'fecha_nac'=>'1989-06-25',
             'email'=>'manuelcolorado19@gmail.com',
             'password'=>bcrypt('12345'),
-            'especialidad_id'=>'1'
+            'especialidad_id'=>'1',
 
         ]);
     }

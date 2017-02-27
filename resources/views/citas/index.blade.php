@@ -16,16 +16,16 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Medicos</div>
+                    <div class="panel-heading">Usuarios</div>
 
                     <div class="panel-body">
-                        Listado de Usuario
+                        Listado de Medicos
                   {{--@if(Auth::user()->roles[0]->hasPermissionTo('CrearRole') or Auth::user()->can('CrearRole'))
 
                        @endif--}}
 
                             <a href="{{url('usuarios/create')}}" class="btn btn-success">
-                                <i class="fa fa-user"></i> Nuevo Usuario
+                                <i class="fa fa-user"></i> Nuevo Medico
 
 
 
@@ -37,10 +37,11 @@ POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
 
                         <table class="table table-bordered">
                             <tr>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Especialidad</th>
-                                <th>Email</th>
+                                <th>Fecha</th>
+                                <th>Paciente</th>
+                                <th>Especilidad</th>
+                                <th>Medico </th>
+
 
 
                                 <th colspan="3" width="10%">Acciones</th>
@@ -48,16 +49,19 @@ POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
 {{--Auth::user()->hasRole('Asministrador')
 
 Auth::user('Administrador') as $user--}}
-                            @foreach($usuarios as $usuario)
+                            @foreach($cita as $cita)
                                 <tr>
-                                    <td>{{$usuario->nombre}}</td>
-                                    <td>{{$usuario->apellido}}</td>
-                                    <td>{{$usuario->especialidad->descripcion}}</td>
-                                    <td>{{$usuario->email}}</td>
+                                    <td>{{$cita->fecha}}</td>
+                                    <td>{{$cita->user->nombre." ".$cita->user->apellido}}</td>
+                                    <td>{{$cita->especial->descripcion}}</td>
+                                    <td>{{$cita->doctor->nombre}}</td>
 
 
 
-                                    <td><a href="{{url('/usuarios/'.$usuario->id.'/edit')}}" class="btn btn-primary">
+
+
+
+                                    <td><a href="{{url('/usuarios/'.$cita->id.'/edit')}}" class="btn btn-primary">
                                             <!--i.glaphicon.glaphicon-edit-->
                                             <i class="fa fa-edit"></i>
                                         </a>
@@ -65,8 +69,8 @@ Auth::user('Administrador') as $user--}}
                                     </td>
                                     <td>
                                         <button class="btn btn-danger"
-                                                data-action="{{ url('/usuarios/'.$usuario->id) }}"
-                                                data-name="{{ $usuario->name."".$usuario->apellido."C.I.:".$usuario->cedula}}"
+                                                data-action="{{ url('/usuarios/'.$cita->id) }}"
+                                                data-name="{{ $cita->name."".$cita->apellido."C.I.:".$cita->cedula}}"
                                                 data-toggle="modal" data-target="#confirm-delete">
                                             <i class ="fa fa-trash fa 1x"></i>
                                         </button>
@@ -77,7 +81,7 @@ Auth::user('Administrador') as $user--}}
 
 
                             @endforeach
-                        {{-- <th colspan="4" class="text-center">{{$usuarios->links()}}</th>--}}
+                        {{-- <th colspan="4" class="text-center">{{$citas->links()}}</th>--}}
                         </table>
 
 

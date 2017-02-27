@@ -45,5 +45,12 @@ class RolesTableSeeder extends Seeder
             'created_at'=> \Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now(),
         ]);
+
+        DB::table('roles')->insert([
+
+            'name'=>'paciente',
+            'created_at'=> \Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now(),
+        ]);
     }
 }

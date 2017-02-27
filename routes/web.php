@@ -21,5 +21,11 @@ Route::get('/home', 'HomeController@index');
 Route::resource('/usuarios', 'UsersController');
 Route::resource('/citas', 'CitasController');
 Route::resource('/recipes', 'RecipesController');
+Route::get('/citaspormedico', 'CitasController@citaspormedico');
+Route::get('/citas/{id}/citamedico', 'CitasController@mostrarcitas');
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

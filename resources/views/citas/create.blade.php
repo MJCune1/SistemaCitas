@@ -41,7 +41,7 @@
                             </div>
 
 
-                            <div class="form-group{{$errors->has('estatus') ? 'has-error' : ''}}">
+                          {{-- <div class="form-group{{$errors->has('estatus') ? 'has-error' : ''}}">
                                 <label for="estatus" class="col-md-4 control-label">estatus</label>
                                 <div class="col-md-6">
                                     <select name="estatus" id="estatus" class="form-control" >
@@ -54,7 +54,7 @@
                                     @endif
                                 </div>
                             </div>
-
+--}}
 
                             <div class="form-group{{$errors->has('especialidad') ? 'has-error' : ''}}">
                                 <label for="usuario" class="col-md-4 control-label">Especialidad</label>

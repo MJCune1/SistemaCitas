@@ -17,6 +17,10 @@ class CitasController extends Controller
      */
     public function index()
     {
+
+        $citas = Cita::status()->paginate();
+        return view ('citas.index', ['cita'=>$citas]);
+
         //
     }
 
@@ -29,7 +33,7 @@ class CitasController extends Controller
     {
         $especialidad = Especialidad::All();
         $medicos = User::role('medico')->get();
-        $usuarios = User::All();
+        $usuarios = User::role('paciente')->get();
         return view('citas.create', ['usuario'=>$usuarios,'medico'=>$medicos, 'especialidad'=>$especialidad]);
     }
 
@@ -45,7 +49,7 @@ class CitasController extends Controller
 
             'fecha'=>'max:255',
             'paciente'=>'required',
-            'estatus'=>'max:255',
+            'status'=>'max:255',
             'especialidad'=>'required',
             'medico'=>'required|max:50',
 
@@ -62,7 +66,7 @@ class CitasController extends Controller
 
             'fecha'=>$request->input('fecha'),
             'usuario'=>$request->input('paciente'),
-            'estatus'=>$request->input('estatus'),
+            'status'=>$request->input('estatus'),
             'especialidad'=>$request->input('especialidad'),
             'medico'=>$request->input('medico'),
 
@@ -74,7 +78,7 @@ class CitasController extends Controller
 
 
 
-        return redirect('/usuarios')->with('mensaje', 'Usuario creado con exito');
+        return redirect('/citas')->with('mensaje', 'Cita creado con exito');
 
 
 
@@ -123,5 +127,22 @@ class CitasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function citaspormedico()
+    {
+
+        $usuarios = User::role('medico')->paginate();
+        return view('citas.citaspormedico', ['usuarios'=>$usuarios]);
+
+    }
+
+    public function mostrarcitas($id)
+    {
+
+      $usuarios= Cita::where('medico', $id)->get();
+
+        return view('citas.citasmedico',['usuarios'=>$usuarios]);
+
     }
 }

@@ -16,7 +16,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nombre', 'apellido','email', 'password', 'cedula', 'especialidad_id'
+        'nombre',
+        'apellido',
+        'cedula',
+        'direccion',
+        'email',
+        'telefono',
+        'celular',
+        'password',
+        'especialidad_id',
+        'fecha_nac',
     ];
 
     /**
@@ -43,7 +52,20 @@ class User extends Authenticatable
     public function citas(){
 
 
-       return $this->hasOne('App\Cita');
+       return $this->belongsTo('App\Cita');
     }
+
+    public function citasmedico(){
+
+
+        return $this->belongsTo('App\Cita','medico');
+    }
+
+
+    public function getAge(){
+        $this->fecha_nac->diff(Carbon::now())
+        ->format('%y years');
+        }
+
 
 }

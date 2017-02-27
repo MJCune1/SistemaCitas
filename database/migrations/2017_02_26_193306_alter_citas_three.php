@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterTableRecipe extends Migration
+class AlterCitasThree extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,19 @@ class AlterTableRecipe extends Migration
      */
     public function up()
     {
-        schema::table('recipe', function(Blueprint $table){
+        schema::table('citas', function (Blueprint $table){
 
-
-            $table->enum('status',['entregado','pendiente']);
-            $table->date('fecha_emision');
-            $table->date('fecha_entrega')->nullable();
+            $table->dropColumn('status');
 
         });
+
+
+        schema::table('citas', function (Blueprint $table){
+
+            $table->enum('status',['vista','pendiente'])->default('pendiente');
+
+        });
+
     }
 
     /**

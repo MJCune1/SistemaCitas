@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+
 class RegisterController extends Controller
 {
     /*
@@ -48,10 +49,19 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'nombre'=>'required|max:50',
+            'apellido'=>'required|max:50',
+            'cedula'=>'required|max:8|unique:users',
+            'sexo'=>'required',
+            'fecha_nac'=>'required',
+            'direccion'=>'required|max:250',
+            'telefono'=>'max:255',
+            'celular'=>'max:255',
+            'email'=>'required|email|max:255|unique:users',
+            'password'=>'required|min:6|confirmed',
         ]);
+
+
     }
 
     /**
@@ -62,10 +72,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        $user= User::create([
+            'nombre' => $data['nombre'],
+            'apellido' => $data['apellido'],
+            'fecha_nac' => $data['fecha_nac'],
+            'cedula' => $data['cedula'],
+            'direccion' => $data['direccion'],
+            'telefono' => $data['telefono'],
+            'celular' => $data['celular'],
+            'sexo' => $data['sexo'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+
+        $user ->assignRole('paciente');
+        return $user;
+
     }
 }

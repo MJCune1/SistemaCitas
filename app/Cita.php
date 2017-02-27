@@ -7,23 +7,48 @@ use Illuminate\Database\Eloquent\Model;
 class Cita extends Model
 {
 
-    protected $fillable =['especialidad','usuario','medico','fecha', 'estatus'];
+    protected $fillable =['especialidad','usuario','medico','fecha', 'estatus','usuario'];
 
-    public function medico(){
 
-        return $this->hasOne('App\User', 'especialidad_id');
+
+    public function especial(){
+
+
+        return $this->belongsTo('App\Especialidad','especialidad');
+    }
+
+
+    public function user(){
+
+
+        return $this->belongsTo('App\User','usuario');
+    }
+
+
+    public function doctor(){
+
+
+        return $this->belongsTo('App\User','medico');
+    }
+
+
+
+
+
+
+    public function ScopeId($query, $id){
+
+        
+        return $query->where('medico','like','%$id%');
+
 
     }
 
-    public function especialidad(){
+    public function ScopeStatus($query){
 
 
-        return $this->belongsTo('App\Especialidad');
-    }
+        return $query->where('status','=','pendiente');
 
-    public function paciente(){
-
-        return $this->hasOne('App\User', 'especialidad_id');
 
     }
 

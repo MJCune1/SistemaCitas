@@ -18,6 +18,9 @@ class CreateUsersTable extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('cedula')->unique();
+            $table->text('direccion');
+            $table->date('fecha_nac');
+            $table->enum('sexo',['masculino','femenino']);
             $table->string('telefono')->nullable();
             $table->string('celular')->nullable();
             $table->string('email')->unique();

@@ -16,23 +16,23 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Medicos</div>
+                    <div class="panel-heading">Usuarios</div>
 
                     <div class="panel-body">
-                        Listado de Usuario
-                  {{--@if(Auth::user()->roles[0]->hasPermissionTo('CrearRole') or Auth::user()->can('CrearRole'))
+                        Listado de Medicos
+                        {{--@if(Auth::user()->roles[0]->hasPermissionTo('CrearRole') or Auth::user()->can('CrearRole'))
 
-                       @endif--}}
+                             @endif--}}
 
-                            <a href="{{url('usuarios/create')}}" class="btn btn-success">
-                                <i class="fa fa-user"></i> Nuevo Usuario
-
-
+                        <a href="{{url('usuarios/create')}}" class="btn btn-success">
+                            <i class="fa fa-user"></i> Nuevo Medico
 
 
-{{--comentario en laravel  <a href="{{url('usuarios/create')}}" class="btn btn-success">
-                            <i class="fa fa-user"></i> Nuevo Role
-POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
+
+
+                            {{--comentario en laravel  <a href="{{url('usuarios/create')}}" class="btn btn-success">
+                                                        <i class="fa fa-user"></i> Nuevo Role
+                            POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
                         </a>
 
                         <table class="table table-bordered">
@@ -45,9 +45,9 @@ POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
 
                                 <th colspan="3" width="10%">Acciones</th>
                             </tr>
-{{--Auth::user()->hasRole('Asministrador')
+                            {{--Auth::user()->hasRole('Asministrador')
 
-Auth::user('Administrador') as $user--}}
+                            Auth::user('Administrador') as $user--}}
                             @foreach($usuarios as $usuario)
                                 <tr>
                                     <td>{{$usuario->nombre}}</td>
@@ -57,19 +57,11 @@ Auth::user('Administrador') as $user--}}
 
 
 
-                                    <td><a href="{{url('/usuarios/'.$usuario->id.'/edit')}}" class="btn btn-primary">
+                                    <td><a href="{{url('/citas/'.$usuario->id.'/citamedico')}}" class="btn btn-primary">
                                             <!--i.glaphicon.glaphicon-edit-->
                                             <i class="fa fa-edit"></i>
                                         </a>
 
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger"
-                                                data-action="{{ url('/usuarios/'.$usuario->id) }}"
-                                                data-name="{{ $usuario->name."".$usuario->apellido."C.I.:".$usuario->cedula}}"
-                                                data-toggle="modal" data-target="#confirm-delete">
-                                            <i class ="fa fa-trash fa 1x"></i>
-                                        </button>
                                     </td>
 
 
@@ -77,7 +69,7 @@ Auth::user('Administrador') as $user--}}
 
 
                             @endforeach
-                        {{-- <th colspan="4" class="text-center">{{$usuarios->links()}}</th>--}}
+                            {{-- <th colspan="4" class="text-center">{{$usuarios->links()}}</th>--}}
                         </table>
 
 
@@ -112,12 +104,12 @@ Auth::user('Administrador') as $user--}}
                                 data-dismiss="modal">Cancelar
                         </button>
 
-                   {{-- @if(Auth::user()->roles[0]->hasPermissionTo('EliminarUsuario') or Auth::user()->can('EliminarUsuario'))--}}
+                        {{-- @if(Auth::user()->roles[0]->hasPermissionTo('EliminarUsuario') or Auth::user()->can('EliminarUsuario'))--}}
                         <button id="delete-btn"
                                 class="btn btn-danger"
                                 title="Eliminar">Eliminar
                         </button>
-                    {{-- @endif--}}
+                        {{-- @endif--}}
                     </form>
                 </div>
             </div>

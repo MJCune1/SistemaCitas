@@ -24,20 +24,20 @@
                                     @endif
                                 </div>
                             </div>
+
                             <div class="form-group{{ $errors->has('apellido') ? ' has-error' : '' }}">
-                                <label for="apellido" class="col-md-4 control-label">Apellido</label>
+                                <label for="name" class="col-md-4 control-label">Name</label>
 
                                 <div class="col-md-6">
                                     <input id="apellido" type="text" class="form-control" name="apellido" value="{{ old('apellido') }}" required autofocus>
 
-                                    @if ($errors->has('apellido '))
+                                    @if ($errors->has('apellido'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('apellido') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
-
                             <div class="form-group{{ $errors->has('cedula') ? ' has-error' : '' }}">
                                 <label for="cedula" class="col-md-4 control-label">Cedula</label>
 
@@ -51,7 +51,69 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('fecha_nac') ? ' has-error' : '' }}">
+                                <label for="fecha_nac" class="col-md-4 control-label">Edad</label>
 
+                                <div class="col-md-6">
+                                    <input id="fecha_nac" type="text" class="form-control" name="fecha_nac" value="{{ old('fecha_nac') }}" required autofocus>
+
+                                    @if ($errors->has('fecha_nac'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('fecha_nac') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('direccion') ? ' has-error' : '' }}">
+                                <label for="direccion" class="col-md-4 control-label">Direccion</label>
+
+                                <div class="col-md-6">
+                                    <input id="direccion" type="text" class="form-control" name="direccion" value="{{ old('direccion') }}" required autofocus>
+
+                                    @if ($errors->has('direccion'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('direccion') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('telefono') ? ' has-error' : '' }}">
+                                <label for="telefono" class="col-md-4 control-label">Telefono</label>
+
+                                <div class="col-md-6">
+                                    <input id="telefono" type="text" class="form-control" name="telefono" value="{{ old('telefono') }}" required autofocus>
+
+                                    @if ($errors->has('telefono'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('telefono') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('celular') ? ' has-error' : '' }}">
+                                <label for="celular" class="col-md-4 control-label">Celular</label>
+
+                                <div class="col-md-6">
+                                    <input id="celular" type="text" class="form-control" name="celular" value="{{ old('celular') }}" required autofocus>
+
+                                    @if ($errors->has('celular'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('celular') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('sexo') ? ' has-error' : '' }}">
+                                <label for="sexo" class="col-md-4 control-label">Sexo</label>
+                                <label class="radio-inline" style="margin-left:2%;"><input type="radio" name="sexo" value="femenino">F</label>
+                                <label class="radio-inline"><input type="radio" name="sexo" value="masculino">M</label>
+                                @if ($errors->has('sexo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('sexo') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>

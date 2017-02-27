@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCitasTable extends Migration
+class CreateTableHistoria extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,17 @@ class CreateCitasTable extends Migration
      */
     public function up()
     {
-        Schema::create('citas', function (Blueprint $table) {
+        schema::create('historia', function(Blueprint $table){
+
             $table->increments('id');
             $table->integer('usuario')->unsigned();
             $table->foreign('usuario')->references('id')->on('users');
-            $table->integer('especialidad')->unsigned();
-            $table->foreign('especialidad')->references('id')->on('especialidades');
-            $table->string('fecha');
-            $table->enum('status',['vista','pendiente']);
-            $table->string('medico');
-            $table->unique(['usuario','especialidad','fecha']);
-            $table->timestamps();
+            $table->integer('medico')->unsigned();
+            $table->foreign('medico')->references('id')->on('users');
+            $table->integer('recipe')->unsigned();
+            $table->foreign('recipe')->references('id')->on('recipe');
+
+
 
         });
     }
@@ -35,6 +35,6 @@ class CreateCitasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('citas');
+        //
     }
 }
