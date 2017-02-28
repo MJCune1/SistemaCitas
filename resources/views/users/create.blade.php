@@ -157,6 +157,7 @@
                                     <label for="role" class="col-md-4 control-label">Rol</label>
                                     <div class="col-md-6">
                                         <select name="role" id="role" class="form-control" >
+
                                             @foreach($roles as $role)
                                                 <option value="{{$role->name}}">{{$role->name}}</option>
                                             @endforeach
@@ -172,6 +173,7 @@
                                 <label for="especialidad" class="col-md-4 control-label">Especialidad</label>
                                 <div class="col-md-6">
                                     <select name="especialidad" id="especialidad" class="form-control" >
+                                        <option value="">Seleccione en caso de ser medico</option>
                                         @foreach($espe as $espe)
                                             <option value="{{$espe->id}}">{{$espe->descripcion}}</option>
                                         @endforeach

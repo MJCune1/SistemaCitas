@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Validator;
 use App\Cita;
+use Auth;
 
 class CitasController extends Controller
 {
@@ -143,6 +144,16 @@ class CitasController extends Controller
       $usuarios= Cita::where('medico', $id)->get();
 
         return view('citas.citasmedico',['usuarios'=>$usuarios]);
+
+    }
+
+    public function miscitas(){
+
+        $id = Auth::user()->id;
+        $citas= Cita::where('medico', $id)->where('status','=','pendiente')->get();
+        //$citas = Cita::findorFail($id)->get();
+
+        return view('doctores.home',['citas'=>$citas]);
 
     }
 }

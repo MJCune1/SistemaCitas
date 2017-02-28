@@ -6,10 +6,8 @@ use App\Historia;
 use App\User;
 use Illuminate\Http\Request;
 use Validator;
-use App\Recipe;
 
-
-class RecipesController extends Controller
+class HistoriasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +17,8 @@ class RecipesController extends Controller
     public function index()
     {
 
-        $usuarios = Recipe::all();
-        return view ('recipes.index', ['usuarios'=>$usuarios]);
+        $historias = Historia::all();
+        return view('historia.index',['historias'=>$historias]);
     }
 
     /**
@@ -30,10 +28,10 @@ class RecipesController extends Controller
      */
     public function create()
     {
-        $historias = Historia::all();
-        $medicos = User::role('medico')->get();
         $pacientes = User::role('paciente')->get();
-        return view ('recipes.create',['pacientes'=>$pacientes],['medicos'=>$medicos,'historias'=>$historias]);
+        $doctores = User::role('medico')->get();
+        return view('historia.create', ['medicos'=>$doctores], ['pacientes'=>$pacientes]);
+
 
     }
 
@@ -47,14 +45,10 @@ class RecipesController extends Controller
     {
         $v = Validator::make($request->All(), [
 
-            'fecha_emision'=>'required|max:50',
-            'paciente'=>'required',
-            'medico'=>'required|max:255',
-            'historia'=>'required',
-            'observaciones'=>'required|max:255',
-            'medicina_1'=>'max:255',
-            'medicina_2'=>'max:255',
-            'medicina_2'=>'max:255',
+            'paciente'=>'required|max:50',
+            'medico'=>'required|max:50',
+            'informe'=>'required|max:350',
+
 
         ]);
 
@@ -66,25 +60,19 @@ class RecipesController extends Controller
 
 
 
-        $user=Recipe::create([
+        $user=Historia::create([
 
-            'fecha_emision'=>$request->input('fecha_emision'),
-            'estatus'=>$request->input('estatus'),
-            'paciente'=>$request->input('paciente'),
-            'doctor'=>$request->input('medico'),
-            'historia_id'=>$request->input('historia'),
-            'observaciones'=>$request->input('observaciones'),
-            'medicina_1'=>$request->input('medicina_1'),
-            'medicina_2'=>$request->input('medicina_2'),
-            'medicina_3'=>$request->input('medicina_3'),
+            'usuario'=>$request->input('paciente'),
+            'medico'=>$request->input('medico'),
+            'informe'=>$request->input('informe'),
+
 
 
 
         ]);
 
 
-
-        return redirect('/recipes')->with('mensaje', 'recipe creado con exito');
+        return redirect('/historias')->with('mensaje', 'Historia creada con exito');
 
 
 
@@ -109,11 +97,7 @@ class RecipesController extends Controller
      */
     public function edit($id)
     {
-        $recipe = Recipe::findOrfail($id);
-        $historias = Historia::all();
-        $medicos = User::role('medico')->get();
-        $pacientes = User::role('paciente')->get();
-        return view ('recipes.edit',['pacientes'=>$pacientes,'recipe'=>$recipe]);
+        //
     }
 
     /**

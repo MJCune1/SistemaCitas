@@ -61,6 +61,12 @@ class User extends Authenticatable
         return $this->belongsTo('App\Cita','medico');
     }
 
+public function historia(){
+
+
+        return $this->hasOne('App\Historia');
+}
+
 
     public function getAge(){
         $this->fecha_nac->diff(Carbon::now())

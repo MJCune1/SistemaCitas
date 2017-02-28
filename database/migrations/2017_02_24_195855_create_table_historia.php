@@ -20,8 +20,6 @@ class CreateTableHistoria extends Migration
             $table->foreign('usuario')->references('id')->on('users');
             $table->integer('medico')->unsigned();
             $table->foreign('medico')->references('id')->on('users');
-            $table->integer('recipe')->unsigned();
-            $table->foreign('recipe')->references('id')->on('recipe');
 
 
 

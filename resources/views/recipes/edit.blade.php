@@ -15,7 +15,7 @@
                                 <label for="fecha_emision" class="col-md-4 control-label">fecha de emision</label>
 
                                 <div class="col-md-6">
-                                    <input id="fecha_emision" type="text" class="form-control" name="fecha_emision" value="{{ old('fecha_emision') }}" required autofocus>
+                                    <input id="fecha_emision" type="text" class="form-control" name="fecha_emision" value="{{ $recipe->fecha_emision or old('fecha_emision') }}" required autofocus>
 
                                     @if ($errors->has('fecha_emision'))
                                         <span class="help-block">
@@ -40,20 +40,6 @@
                             </div>
                             @endhasrole
 
-                            <div class="form-group{{$errors->has('medico') ? 'has-error' : ''}}">
-                                <label for="medico" class="col-md-4 control-label">Medico</label>
-                                <div class="col-md-6">
-                                    <select name="medico" id="medico" class="form-control" required >
-                                        @foreach($medicos as $usuario)
-                                            <option value="{{$usuario->id}}">{{$usuario->nombre." ".$usuario->apellido}}</option>
-                                        @endforeach
-                                    </select>
-                                    @if($errors->has('medico'))
-                                        <span class="help-block"></span>
-                                        <strong>{{$errors->first('medico')}}</strong>
-                                    @endif
-                                </div>
-                            </div>
 
                             <div class="form-group{{$errors->has('paciente') ? 'has-error' : ''}}">
                                 <label for="paciente" class="col-md-4 control-label">Paciente</label>
@@ -61,7 +47,7 @@
                                     <select name="paciente" id="paciente" class="form-control" required>
                                         <option value="">Seleccione un paciente</option>
                                         @foreach($pacientes as $usuario)
-                                            <option value="{{$usuario->id}}">{{$usuario->nombre." ".$usuario->apellido}}</option>
+                                            <option value="{{$usuario->id}}" @if($usuario->id==$recipe->user->id) selected @endif>{{$usuario->nombre." ".$usuario->apellido}}</option>
                                         @endforeach
                                     </select>
                                     @if($errors->has('paciente'))
@@ -72,20 +58,6 @@
                             </div>
 
 
-                            <div class="form-group{{$errors->has('historia') ? 'has-error' : ''}}">
-                                <label for="paciente" class="col-md-4 control-label">Agregar a historia</label>
-                                <div class="col-md-6">
-                                    <select name="historia" id=historia" class="form-control" required>
-                                        @foreach($historias as $usuario)
-                                            <option value="{{$usuario->id}}">{{"Historia N°: ".$usuario->id." |  de ".$usuario->user->nombre." ".$usuario->user->apellido}}</option>
-                                        @endforeach
-                                    </select>
-                                    @if($errors->has('historia'))
-                                        <span class="help-block"></span>
-                                        <strong>{{$errors->first('historia')}}</strong>
-                                    @endif
-                                </div>
-                            </div>
 
                     @hasrole('farmaceuta');
                             <div class="form-group{{$errors->has('estatus') ? 'has-error' : ''}}">

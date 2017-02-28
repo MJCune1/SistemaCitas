@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Cita;
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+
+        $id = Auth::user()->id;
+        $citas= Cita::where('usuario', $id)->get();
+        //$citas = Cita::findorFail($id)->get();
+        
+        return view('home',['citas'=>$citas]);
     }
 }

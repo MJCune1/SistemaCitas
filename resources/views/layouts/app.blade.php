@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link hret="/css/font-awesome" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -53,9 +54,31 @@
                             <li><a href="{{ url('/login') }}">Login</a></li>
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
+                            @hasrole('administrador')
+                            <li><a href="{{ url('/usuarios') }}">usuarios</a></li>
+                            <li><a href="{{ url('/recipes') }}">recipes</a></li>
+                            <li><a href="{{ url('/historia') }}">historia</a></li>
+                            <li><a href="{{ url('/citas') }}">usuarios</a></li>
+                            @endhasrole
+
+                            @hasrole('secretaria')
+                            <li><a href="{{ url('/usuarios') }}">usuarios</a></li>
+                            <li><a href="{{ url('/citas') }}">usuarios</a></li>
+                            @endhasrole
+
+                            @hasrole('farmaceuta')
+                                <li><a href="{{ url('/recipes') }}">Recipes</a></li>
+                            @endhasrole
+
+                            @hasrole('medico')
+                            <li><a href="{{ url('/usuarios') }}">usuarios</a></li>
+                            <li><a href="{{ url('/historias') }}">Historias</a></li>
+                            <li><a href="{{ url('/miscitas') }}">Mis Citas</a></li>
+                            <li><a href="{{ url('/recipes/create') }}">Recipes</a></li>
+                            @endhasrole
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->roles[0]->name." ".Auth::user()->nombre." ". Auth::user()->apellido }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">

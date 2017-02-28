@@ -18,11 +18,14 @@ class CreateTableRecipe extends Migration
             $table->increments('id');
             $table->integer('paciente')->unsigned();
             $table->foreign('paciente')->references('id')->on('users');
-            $table->integer('doctor')->references('id')->on('users');
+            $table->integer('doctor')->unsigned();
+            $table->foreign('doctor')->references('id')->on('users');
             $table->text('observaciones');
             $table->string('medicina_1')->nullable();
             $table->string('medicina_2')->nullable();
             $table->string('medicina_3')->nullable();
+
+
 
 
 

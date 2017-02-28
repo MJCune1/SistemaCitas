@@ -20,14 +20,25 @@ class UsersController extends Controller
     public function index()
     {
 
-        $usuarios = User::role('medico')->paginate();
+        $usuarios = User::paginate();
 
-        return view ('doctores.index',['usuarios'=>$usuarios]);
+        return view ('users.index',['usuarios'=>$usuarios]);
 
 
 
 
         
+    }
+
+
+    public function medicos()
+    {
+
+        $usuarios = User::role('medico')->paginate();
+
+        return view ('doctores.index',['usuarios'=>$usuarios]);
+
+
     }
 
     /**
@@ -85,7 +96,7 @@ class UsersController extends Controller
                 'telefono'=>$request->input('telefono'),
                 'celular'=>$request->input('celular'),
                 'email'=>$request->input('email'),
-                'password'=>$request->input('password'),
+                'password'=>bcrypt($request->input('password')),
                 'especialidad_id'=>$request->input('especialidad'),
 
 
