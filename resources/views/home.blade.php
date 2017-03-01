@@ -17,7 +17,7 @@
                                     <div class="thumbnail">
                                         <div>
                                             <h3>Fecha: {{ $curso->fecha }}</h3>
-                                            <h4>Doctor: {{ $curso->doctor->nombre}}</h4>
+                                            <h4>Doctor: {{ $curso->doctor->nombre." ".$curso->doctor->apellido}}</h4>
                                             <p>Especialidad: {{ $curso->especial->descripcion }}</p>
 
                                             <p>

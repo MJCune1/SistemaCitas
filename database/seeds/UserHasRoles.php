@@ -13,10 +13,18 @@ class UserHasRoles extends Seeder
     {
         DB::table('user_has_roles')->insert([
 
-            'role_id'=>'5',
+            'role_id'=>'4',
             'user_id'=>'1',
 
         ]);
+
+        DB::table('user_has_roles')->insert([
+
+            'role_id'=>'2',
+            'user_id'=>'2',
+
+        ]);
+
     }
 
 

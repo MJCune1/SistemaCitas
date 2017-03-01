@@ -32,12 +32,6 @@ class RolesTableSeeder extends Seeder
             'updated_at'=>\Carbon\Carbon::now(),
         ]);
 
-        DB::table('roles')->insert([
-
-            'name'=>'usuario',
-            'created_at'=> \Carbon\Carbon::now(),
-            'updated_at'=>\Carbon\Carbon::now(),
-        ]);
 
         DB::table('roles')->insert([
 

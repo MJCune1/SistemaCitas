@@ -13,6 +13,7 @@ class Recipe extends Model
         'fecha_entrega',
         'paciente',
         'doctor',
+        'status',
         'observaciones',
         'medicina_1',
         'medicina_2',

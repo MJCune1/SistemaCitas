@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-    <link hret="/css/font-awesome" rel="stylesheet">
+    <link href="/css/font-awesome.css" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -62,8 +62,7 @@
                             @endhasrole
 
                             @hasrole('secretaria')
-                            <li><a href="{{ url('/usuarios') }}">usuarios</a></li>
-                            <li><a href="{{ url('/citas') }}">usuarios</a></li>
+                            <li><a href="{{ url('/citas') }}">Citas</a></li>
                             @endhasrole
 
                             @hasrole('farmaceuta')
@@ -74,8 +73,12 @@
                             <li><a href="{{ url('/usuarios') }}">usuarios</a></li>
                             <li><a href="{{ url('/historias') }}">Historias</a></li>
                             <li><a href="{{ url('/miscitas') }}">Mis Citas</a></li>
-                            <li><a href="{{ url('/recipes/create') }}">Recipes</a></li>
+                            <li><a href="{{ url('/recipes') }}">Recipes</a></li>
                             @endhasrole
+                            @hasrole('paciente')
+                            <li><a href="{{ url('/home') }}">Mis Citas</a></li>
+                            @endhasrole
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->roles[0]->name." ".Auth::user()->nombre." ". Auth::user()->apellido }} <span class="caret"></span>
@@ -106,5 +109,12 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script type="application/javascript">
+        $('#confirm-delete').on('show.bs.modal', function (e) {
+            $(this).find('.form-delete').attr('action', $(e.relatedTarget).data('action'));
+            $(this).find('.nombre').text($(e.relatedTarget).data('name'));
+        });
+    </script>
+
 </body>
 </html>

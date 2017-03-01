@@ -16,16 +16,15 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Usuarios</div>
+                    <div class="panel-heading">Seleccione Medico</div>
 
                     <div class="panel-body">
-                        Listado de Medicos
+
                         {{--@if(Auth::user()->roles[0]->hasPermissionTo('CrearRole') or Auth::user()->can('CrearRole'))
 
                              @endif--}}
 
-                        <a href="{{url('usuarios/create')}}" class="btn btn-success">
-                            <i class="fa fa-user"></i> Nuevo Medico
+
 
 
 

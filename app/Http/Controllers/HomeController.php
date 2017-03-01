@@ -26,6 +26,7 @@ class HomeController extends Controller
     public function index()
     {
 
+
         $id = Auth::user()->id;
         $citas= Cita::where('usuario', $id)->get();
         //$citas = Cita::findorFail($id)->get();

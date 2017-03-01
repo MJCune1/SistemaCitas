@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('apellido') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="name" class="col-md-4 control-label">Apellido</label>
 
                             <div class="col-md-6">
                                 <input id="apellido" type="text" class="form-control" name="apellido" value="{{ old('apellido') }}" required autofocus>
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="form-group{{ $errors->has('fecha_nac') ? ' has-error' : '' }}">
-                            <label for="fecha_nac" class="col-md-4 control-label">Edad</label>
+                            <label for="fecha_nac" class="col-md-4 control-label">Fecha de Nacimiento</label>
 
                             <div class="col-md-6">
                                 <input id="fecha_nac" type="text" class="form-control" name="fecha_nac" value="{{ old('fecha_nac') }}" required autofocus>

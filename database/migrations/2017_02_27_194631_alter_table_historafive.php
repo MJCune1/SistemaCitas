@@ -16,8 +16,7 @@ class AlterTableHistorafive extends Migration
         schema::table('historia', function (Blueprint $table){
 
 
-           $table->integer('usuario')->unsigned()->unique();
-           $table->foreign('usuario')->references('id')->on('users');
+           $table->unique(['usuario','medico']);
 
 
 

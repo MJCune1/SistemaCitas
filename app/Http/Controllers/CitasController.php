@@ -18,6 +18,9 @@ class CitasController extends Controller
      */
     public function index()
     {
+        if(!Auth::user()->hasRole('secretaria'))
+            if(!Auth::user()->hasRole('administrador'))
+                abort(503, 'Acceso Prohibido');
 
         $citas = Cita::status()->paginate();
         return view ('citas.index', ['cita'=>$citas]);
@@ -32,6 +35,10 @@ class CitasController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->hasRole('secretaria'))
+            if(!Auth::user()->hasRole('administrador'))
+                abort(503, 'Acceso Prohibido');
+
         $especialidad = Especialidad::All();
         $medicos = User::role('medico')->get();
         $usuarios = User::role('paciente')->get();
@@ -46,6 +53,12 @@ class CitasController extends Controller
      */
     public function store(Request $request)
     {
+
+        if(!Auth::user()->hasRole('secretaria'))
+            if(!Auth::user()->hasRole('administrador'))
+                abort(503, 'Acceso Prohibido');
+
+
         $v = Validator::make($request->All(), [
 
             'fecha'=>'max:255',
@@ -104,7 +117,11 @@ class CitasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pacientes = User::all();
+        $cita = Cita::findOrFail($id);
+        $especialidad = Especialidad::all();
+        $medicos = User::role('medico')->get();
+        return view('citas.edit', ['cita'=>$cita, 'usuario'=>$pacientes, 'especialidad'=>$especialidad, 'medico'=>$medicos]);
     }
 
     /**
@@ -116,7 +133,48 @@ class CitasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(!Auth::user()->hasRole('secretaria'))
+            if(!Auth::user()->hasRole('administrador'))
+                abort(503, 'Acceso Prohibido');
+
+
+        $v = Validator::make($request->All(), [
+
+            'fecha'=>'max:255',
+            'paciente'=>'required',
+            'status'=>'max:255',
+            'especialidad'=>'required',
+            'medico'=>'required|max:50',
+
+        ]);
+
+        if($v->fails()){
+
+            return redirect()->back()->withErrors($v)->withInput();
+        }
+
+
+
+        $cita=Cita::create([
+
+            'fecha'=>$request->input('fecha'),
+            'usuario'=>$request->input('paciente'),
+            'status'=>$request->input('estatus'),
+            'especialidad'=>$request->input('especialidad'),
+            'medico'=>$request->input('medico'),
+
+
+        ]);
+
+
+        //     $user ->assignRole($request->input('role'));
+
+
+
+        return redirect('/citas')->with('mensaje', 'Cita creado con exito');
+
+
+
     }
 
     /**
@@ -127,7 +185,9 @@ class CitasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cita::destroy($id);
+
+
     }
 
     public function citaspormedico()
@@ -140,10 +200,10 @@ class CitasController extends Controller
 
     public function mostrarcitas($id)
     {
-
+        $medico = User::findorFail($id);
       $usuarios= Cita::where('medico', $id)->get();
 
-        return view('citas.citasmedico',['usuarios'=>$usuarios]);
+        return view('citas.citasmedico',['usuarios'=>$usuarios, 'medico'=>$medico]);
 
     }
 

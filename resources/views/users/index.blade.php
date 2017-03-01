@@ -38,7 +38,6 @@ POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
                         <table class="table table-bordered">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Apellido</th>
                                 <th>Edad</th>
                                 <th>Email</th>
                                 <th>Rol</th>
@@ -51,8 +50,7 @@ POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
 Auth::user('Administrador') as $user--}}
                             @foreach($usuarios as $usuario)
                                 <tr>
-                                    <td>{{$usuario->nombre}}</td>
-                                    <td>{{$usuario->apellido}}</td>
+                                    <td>{{$usuario->nombre." ".$usuario->apellido}}</td>
                                     <td>{{$usuario->fecha_nac}}</td>
                                     <td>{{$usuario->email}}</td>
                                     <td>{{$usuario->roles[0]->name}}</td>
@@ -79,7 +77,7 @@ Auth::user('Administrador') as $user--}}
 
 
                             @endforeach
-                        {{-- <th colspan="4" class="text-center">{{$usuarios->links()}}</th>--}}
+                        <th colspan="6" class="text-center">{{$usuarios->links()}}</th>
                         </table>
 
 

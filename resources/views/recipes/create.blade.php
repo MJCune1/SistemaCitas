@@ -120,7 +120,7 @@
                                 <label for="medicina_1" class="col-md-4 control-label">Medicina 1</label>
 
                                 <div class="col-md-6">
-                                    <input id="medicina_1" type="text" class="form-control" name="medicina_1" value="{{ old('medicina_1') }}" required autofocus>
+                                    <input id="medicina_1" type="text" class="form-control" name="medicina_1" value="{{ old('medicina_1') }}"  autofocus>
 
                                     @if ($errors->has('medicina_1'))
                                         <span class="help-block">
@@ -133,7 +133,7 @@
                                 <label for="medicina_2" class="col-md-4 control-label">Medicina 2</label>
 
                                 <div class="col-md-6">
-                                    <input id="medicina_2" type="text" class="form-control" name="medicina_2" value="{{ old('medicina_2') }}" required autofocus>
+                                    <input id="medicina_2" type="text" class="form-control" name="medicina_2" value="{{ old('medicina_2') }}"  autofocus>
 
                                     @if ($errors->has('medicina_2'))
                                         <span class="help-block">
@@ -146,7 +146,7 @@
                                 <label for="medicina_3" class="col-md-4 control-label">Medicina 3</label>
 
                                 <div class="col-md-6">
-                                    <input id="medicina_3" type="text" class="form-control" name="medicina_3" value="{{ old('medicina_3') }}" required autofocus>
+                                    <input id="medicina_3" type="text" class="form-control" name="medicina_3" value="{{ old('medicina_3') }}"  autofocus>
 
                                     @if ($errors->has('medicina_3'))
                                         <span class="help-block">

@@ -16,16 +16,16 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Usuarios</div>
+                    <div class="panel-heading">Citas pendientes Dr. {{$medico->nombre." ".$medico->apellido}}</div>
 
                     <div class="panel-body">
-                        Listado de Medicos
+
                         {{--@if(Auth::user()->roles[0]->hasPermissionTo('CrearRole') or Auth::user()->can('CrearRole'))
 
                              @endif--}}
 
-                        <a href="{{url('usuarios/create')}}" class="btn btn-success">
-                            <i class="fa fa-user"></i> Nuevo Medico
+                        <a href="{{url('citas/create')}}" class="btn btn-success">
+                            <i class="fa fa-user"></i> Nueva Cita
 
 
 
@@ -39,8 +39,6 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Apellido</th>
-                                <th>Especialidad</th>
-                                <th>Email</th>
 
 
                                 <th colspan="3" width="10%">Acciones</th>
@@ -53,12 +51,12 @@
                             @foreach($usuarios as $usuario)
                                 <tr>
                                     <td>{{$usuario->fecha}}</td>
-                                    <td>{{$usuario->user->nombre}}</td>
+                                    <td>{{$usuario->user->nombre." ".$usuario->user->apellido}}</td>
 
 
 
 
-                                    <td><a href="{{url('/citas/'.$usuario->id.'/mostrarcitas')}}" class="btn btn-primary">
+                                    <td><a href="{{url('/citas/'.$usuario->id.'/edit')}}" class="btn btn-primary">
                                             <!--i.glaphicon.glaphicon-edit-->
                                             <i class="fa fa-edit"></i>
                                         </a>

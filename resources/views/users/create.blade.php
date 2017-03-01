@@ -173,9 +173,10 @@
                                 <label for="especialidad" class="col-md-4 control-label">Especialidad</label>
                                 <div class="col-md-6">
                                     <select name="especialidad" id="especialidad" class="form-control" >
-                                        <option value="">Seleccione en caso de ser medico</option>
-                                        @foreach($espe as $espe)
-                                            <option value="{{$espe->id}}">{{$espe->descripcion}}</option>
+                                        <option value="4" selected>Seleccione en caso de ser medico</option>
+                                        @foreach($espe->slice(0,3) as $espe)
+
+                                            <option value="{{$espe->id}}" @if($espe->descrpcion=="n/a") selected @endif>{{$espe->descripcion}}</option>
                                         @endforeach
                                     </select>
                                     @if($errors->has('especialidad'))

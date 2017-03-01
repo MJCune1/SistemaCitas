@@ -5,17 +5,17 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Registro de Citas</div>
+                    <div class="panel-heading">Paciente: {{$recipe->user->nombre." ".$recipe->user->apellido}}</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/recipes') }}">
-                            {{ csrf_field('POST')}}
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/recipes/'.$recipe->id) }}">
+                            {{ method_field('PUT')}}
                             {{ csrf_field()}}
 
                             <div class="form-group{{ $errors->has('fecha_emision') ? ' has-error' : '' }}">
                                 <label for="fecha_emision" class="col-md-4 control-label">fecha de emision</label>
 
                                 <div class="col-md-6">
-                                    <input id="fecha_emision" type="text" class="form-control" name="fecha_emision" value="{{ $recipe->fecha_emision or old('fecha_emision') }}" required autofocus>
+                                    <input id="fecha_emision" type="text" class="form-control" name="fecha_emision" value="{{ $recipe->fecha_emision or old('fecha_emision') }}" required autofocus readonly>
 
                                     @if ($errors->has('fecha_emision'))
                                         <span class="help-block">
@@ -39,9 +39,21 @@
                                 </div>
                             </div>
                             @endhasrole
+                    {{--<div class="form-group{{ $errors->has('paciente') ? ' has-error' : '' }}">
+                                <label for="fecha_entrega" class="col-md-4 control-label">fecha entrega</label>
 
+                                <div class="col-md-6">
+                                    <input id="paciente" type="text" class="form-control" name="paciente" value="{{$recipe->user->nombre." ".$recipe->user->apellido}}" readonly  >
 
-                            <div class="form-group{{$errors->has('paciente') ? 'has-error' : ''}}">
+                                    @if ($errors->has('paciente'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('paciente') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>--}}
+
+                        {{-- <div class="form-group{{$errors->has('paciente') ? 'has-error' : ''}}">
                                 <label for="paciente" class="col-md-4 control-label">Paciente</label>
                                 <div class="col-md-6">
                                     <select name="paciente" id="paciente" class="form-control" required>
@@ -55,7 +67,8 @@
                                         <strong>{{$errors->first('paciente')}}</strong>
                                     @endif
                                 </div>
-                            </div>
+                            </div>--}}
+
 
 
 
@@ -64,8 +77,10 @@
                                 <label for="estatus" class="col-md-4 control-label">Estatus</label>
                                 <div class="col-md-6">
                                     <select name="estatus" id="estatus" class="form-control" >
-                                            <option value="pendiente">Pendiente</option>
-                                             <option value="entregado">Entregado</option>
+                                            <option value="pendiente" @if($recipe->status == "pendiente")selected @endif>pendiente</option>
+                                            <option value="entregado" @if($recipe->status == "entregado")selected @endif>entregado</option>
+
+
                                     </select>
                                     @if($errors->has('estatus'))
                                         <span class="help-block"></span>
@@ -79,7 +94,7 @@
                                 <label for="observaciones" class=" col-md-4 control-label">Observaciones</label>
                                 <div class="col-md-6">
             <textarea name="observaciones" id="observaciones" cols="10" rows="2"
-                      class="form-control">{{$curso->contenido or  old('observaciones')}}</textarea>
+                      class="form-control" @if(Auth::user()->hasRole('farmaceuta'))readonly @endif>{{$recipe->observaciones or  old('observaciones')}}</textarea>
 
                                     @if($errors->has('observaciones'))
                                         <span class="help-block"></span>
@@ -92,7 +107,7 @@
                                 <label for="medicina_1" class="col-md-4 control-label">Medicina 1</label>
 
                                 <div class="col-md-6">
-                                    <input id="medicina_1" type="text" class="form-control" name="medicina_1" value="{{ old('medicina_1') }}" required autofocus>
+                                    <input id="medicina_1" type="text" class="form-control" name="medicina_1" value="{{ $recipe->medicina_1 or old('medicina_1') }}" @if(Auth::user()->hasRole('farmaceuta'))readonly @endif   autofocus>
 
                                     @if ($errors->has('medicina_1'))
                                         <span class="help-block">
@@ -105,7 +120,7 @@
                                 <label for="medicina_2" class="col-md-4 control-label">Medicina 2</label>
 
                                 <div class="col-md-6">
-                                    <input id="medicina_2" type="text" class="form-control" name="medicina_2" value="{{ old('medicina_2') }}" required autofocus>
+                                    <input id="medicina_2" type="text" class="form-control" name="medicina_2" value="{{ $recipe->medicina_2 or old('medicina_2') }}" @if(Auth::user()->hasRole('farmaceuta'))readonly @endif   autofocus>
 
                                     @if ($errors->has('medicina_2'))
                                         <span class="help-block">
@@ -114,11 +129,12 @@
                                     @endif
                                 </div>
                             </div>
+
                             <div class="form-group{{ $errors->has('medicina_3') ? ' has-error' : '' }}">
                                 <label for="medicina_3" class="col-md-4 control-label">Medicina 3</label>
 
                                 <div class="col-md-6">
-                                    <input id="medicina_3" type="text" class="form-control" name="medicina_3" value="{{ old('medicina_3') }}" required autofocus>
+                                    <input id="medicina_3" type="text" class="form-control" name="medicina_3" value="{{$recipe->medicina_1 or old('medicina_3') }}" @if(Auth::user()->hasRole('farmaceuta'))readonly @endif  autofocus>
 
                                     @if ($errors->has('medicina_3'))
                                         <span class="help-block">
@@ -127,6 +143,7 @@
                                     @endif
                                 </div>
                             </div>
+
 
 
 
@@ -143,7 +160,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Registrar
+                                        Actualizar
                                     </button>
                                 </div>
                             </div>

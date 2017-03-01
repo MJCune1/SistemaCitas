@@ -16,16 +16,18 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Usuarios</div>
+                    <div class="panel-heading" >Listado de Citas</div>
 
                     <div class="panel-body">
-                        Listado de Medicos
+
                   {{--@if(Auth::user()->roles[0]->hasPermissionTo('CrearRole') or Auth::user()->can('CrearRole'))
 
                        @endif--}}
 
-                            <a href="{{url('usuarios/create')}}" class="btn btn-success">
-                                <i class="fa fa-user"></i> Nuevo Medico
+                            <a href="{{url('citas/create')}}" class="btn btn-success">
+                                <i class="fa fa-user"></i> Nueva Cita</a>
+                                <a href="{{url('/citaspormedico')}}" class="btn btn-success">
+                                    <i class="fa fa-user"></i> Citas por medico</a>
 
 
 
@@ -33,9 +35,9 @@
 {{--comentario en laravel  <a href="{{url('usuarios/create')}}" class="btn btn-success">
                             <i class="fa fa-user"></i> Nuevo Role
 POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
-                        </a>
 
-                        <table class="table table-bordered">
+
+                        <table class="table table-bordered" style="margin-top: 1%;">
                             <tr>
                                 <th>Fecha</th>
                                 <th>Paciente</th>
@@ -54,14 +56,14 @@ Auth::user('Administrador') as $user--}}
                                     <td>{{$cita->fecha}}</td>
                                     <td>{{$cita->user->nombre." ".$cita->user->apellido}}</td>
                                     <td>{{$cita->especial->descripcion}}</td>
-                                    <td>{{$cita->doctor->nombre}}</td>
+                                    <td>{{$cita->doctor->nombre." ".$cita->doctor->apellido}}</td>
 
 
 
 
 
 
-                                    <td><a href="{{url('/usuarios/'.$cita->id.'/edit')}}" class="btn btn-primary">
+                                    <td><a href="{{url('/citas/'.$cita->id.'/edit')}}" class="btn btn-primary">
                                             <!--i.glaphicon.glaphicon-edit-->
                                             <i class="fa fa-edit"></i>
                                         </a>
@@ -69,7 +71,7 @@ Auth::user('Administrador') as $user--}}
                                     </td>
                                     <td>
                                         <button class="btn btn-danger"
-                                                data-action="{{ url('/usuarios/'.$cita->id) }}"
+                                                data-action="{{ url('/citas/'.$cita->id) }}"
                                                 data-name="{{ $cita->name."".$cita->apellido."C.I.:".$cita->cedula}}"
                                                 data-toggle="modal" data-target="#confirm-delete">
                                             <i class ="fa fa-trash fa 1x"></i>

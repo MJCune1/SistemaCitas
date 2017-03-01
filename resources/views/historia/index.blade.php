@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
+
+
 @section('content')
+
     <div class="container">
         @if(session('mensaje'))
             <div class="row">
@@ -49,14 +52,14 @@ POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
 Auth::user('Administrador') as $user--}}
                             @foreach($historias as $usuario)
                                 <tr>
-                                    <td>{{$usuario->user->nombre}}</td>
-                                    <td>{{$usuario->doctores->nombre}}</td>
+                                    <td>{{$usuario->user->nombre." ".$usuario->user->apellido}}</td>
+                                    <td>{{$usuario->doctores->nombre." ".$usuario->doctores->apellido}}</td>
                                     <td>{{$usuario->informe}}</td>
 
 
 
 
-                                    <td><a href="{{url('/usuarios/'.$usuario->id.'/edit')}}" class="btn btn-primary">
+                                    <td><a href="{{url('/historias/'.$usuario->id.'/edit')}}" class="btn btn-primary">
                                             <!--i.glaphicon.glaphicon-edit-->
                                             <i class="fa fa-edit"></i>
                                         </a>
@@ -64,8 +67,8 @@ Auth::user('Administrador') as $user--}}
                                     </td>
                                     <td>
                                         <button class="btn btn-danger"
-                                                data-action="{{ url('/usuarios/'.$usuario->id) }}"
-                                                data-name="{{ $usuario->name."".$usuario->apellido."C.I.:".$usuario->cedula}}"
+                                                data-action="{{ url('/historias/'.$usuario->id) }}"
+                                                data-name="{{ $usuario->user->nombre." ".$usuario->user->apellido}}"
                                                 data-toggle="modal" data-target="#confirm-delete">
                                             <i class ="fa fa-trash fa 1x"></i>
                                         </button>
@@ -122,6 +125,5 @@ Auth::user('Administrador') as $user--}}
             </div>
         </div>
     </div>
-
 
 @endsection

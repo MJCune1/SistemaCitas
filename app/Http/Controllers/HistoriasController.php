@@ -6,6 +6,7 @@ use App\Historia;
 use App\User;
 use Illuminate\Http\Request;
 use Validator;
+use Auth;
 
 class HistoriasController extends Controller
 {
@@ -16,7 +17,9 @@ class HistoriasController extends Controller
      */
     public function index()
     {
-
+        if(!Auth::user()->hasRole('medico'))
+            if(!Auth::user()->hasRole('administrador'))
+                abort(503, 'Acceso Prohibido');
         $historias = Historia::all();
         return view('historia.index',['historias'=>$historias]);
     }
@@ -28,6 +31,10 @@ class HistoriasController extends Controller
      */
     public function create()
     {
+        if(!Auth::user()->hasRole('medico'))
+            if(!Auth::user()->hasRole('administrador'))
+                abort(503, 'Acceso Prohibido');
+
         $pacientes = User::role('paciente')->get();
         $doctores = User::role('medico')->get();
         return view('historia.create', ['medicos'=>$doctores], ['pacientes'=>$pacientes]);
@@ -43,6 +50,9 @@ class HistoriasController extends Controller
      */
     public function store(Request $request)
     {
+        if(!Auth::user()->hasRole('medico'))
+            if(!Auth::user()->hasRole('administrador'))
+                abort(503, 'Acceso Prohibido');
         $v = Validator::make($request->All(), [
 
             'paciente'=>'required|max:50',
@@ -97,7 +107,12 @@ class HistoriasController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(!Auth::user()->hasRole('medico'))
+            if(!Auth::user()->hasRole('administrador'))
+                abort(503, 'Acceso Prohibido');
+
+        $historia = Historia::findOrfail($id);
+        return view('historia.edit', ['historia'=>$historia]);
     }
 
     /**

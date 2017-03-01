@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Validator;
 use App\Recipe;
+use Auth;
 
 
 class RecipesController extends Controller
@@ -30,6 +31,10 @@ class RecipesController extends Controller
      */
     public function create()
     {
+
+        if(!Auth::user()->hasRole('medico'))
+            if(!Auth::user()->hasRole('administrador'))
+                abort(503, 'Acceso Prohibido');
         $historias = Historia::all();
         $medicos = User::role('medico')->get();
         $pacientes = User::role('paciente')->get();
@@ -125,7 +130,50 @@ class RecipesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $v = Validator::make($request->All(), [
+
+
+            'fecha_emision' => 'required|max:50',
+            'medico' => 'max:255',
+            'observaciones' => 'max:255',
+            'medicina_1' => 'min:1',
+            'medicina_2' => 'min:1',
+            'medicina_3' => 'min:1',
+
+
+
+
+        ]);
+
+        if ($v->fails()) {
+
+            return redirect()->back()->withErrors($v)->withInput();
+
+        }
+
+
+
+        $recipe = Recipe::findOrFail($id);
+        $recipe->update([
+
+            'fecha_emision'=>$request->input('fecha_emision'),
+            'fecha_entrega'=>$request->input('fecha_entrega'),
+            'medico'=>$request->input('medico'),
+            'status'=>$request->input('estatus'),
+            'observaciones'=>$request->input('observaciones'),
+            'medicina_1'=>$request->input('medicina_1'),
+            'medicina_2'=>$request->input('medicina_2'),
+            'medicina_3'=>$request->input('medicina_3'),
+
+
+
+        ]);
+
+
+
+        return redirect('/recipes')->with('mensaje' , 'Recipe actualizado con exito');
+
+
     }
 
     /**

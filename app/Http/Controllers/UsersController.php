@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Spatie\Permission\Models\Role;
 use Validator;
+use Auth;
 
 
 class UsersController extends Controller
@@ -20,7 +21,7 @@ class UsersController extends Controller
     public function index()
     {
 
-        $usuarios = User::paginate();
+        $usuarios = User::paginate(8);
 
         return view ('users.index',['usuarios'=>$usuarios]);
 
@@ -33,6 +34,10 @@ class UsersController extends Controller
 
     public function medicos()
     {
+
+        if(!Auth::user()->hasRole('medico'))
+            if(!Auth::user()->hasRole('administrador'))
+                abort(503, 'Acceso Prohibido');
 
         $usuarios = User::role('medico')->paginate();
 
@@ -48,6 +53,12 @@ class UsersController extends Controller
      */
     public function create()
     {
+
+        if(!Auth::user()->hasRole('medico'))
+         if(!Auth::user()->hasRole('secretaria'))
+                abort(503, 'Acceso Prohibido');
+
+
         $espe = Especialidad::All();
         $roles = Role::All();
         return view('users.create', ['roles'=>$roles], ['espe'=>$espe]);

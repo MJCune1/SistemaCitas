@@ -34,5 +34,13 @@ class EspecialidadTableSeeder extends Seeder
             'updated_at'=>\Carbon\Carbon::now(),
 
         ]);
+
+        DB::table('especialidades')->insert([
+
+            'descripcion'=>'n/a',
+            'created_at'=> \Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now(),
+
+        ]);
     }
 }

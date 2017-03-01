@@ -16,16 +16,16 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Medicos</div>
+                    <div class="panel-heading">Recipe</div>
 
                     <div class="panel-body">
-                        Listado de Usuario
+                        Listado de Recipes
                   {{--@if(Auth::user()->roles[0]->hasPermissionTo('CrearRole') or Auth::user()->can('CrearRole'))
 
                        @endif--}}
 
-                            <a href="{{url('usuarios/create')}}" class="btn btn-success">
-                                <i class="fa fa-user"></i> Nuevo Usuario
+                            <a href="{{url('recipes/create')}}" class="btn btn-success">
+                                <i class="fa fa-user"></i> Nuevo Recipe
 
 
 
@@ -37,7 +37,7 @@ POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
 
                         <table class="table table-bordered">
                             <tr>
-                                <th>Fecha</th>
+                                <th>Fecha Emision</th>
                                 <th>Paciente</th>
                                 <th>Doctor</th>
                                 <th>Medicina 1</th>
@@ -53,7 +53,7 @@ Auth::user('Administrador') as $user--}}
                             @foreach($usuarios as $usuario)
                                 <tr>
                                     <td>{{$usuario->fecha_emision}}</td>
-                                    <td>{{$usuario->user->nombre}}</td>
+                                    <td>{{$usuario->user->nombre." ".$usuario->user->apellido}}</td>
                                     <td>{{$usuario->medico->nombre}}</td>
                                     <td>{{$usuario->medicina_1}}</td>
                                     <td>{{$usuario->medicina_2}}</td>
