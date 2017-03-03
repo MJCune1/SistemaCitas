@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -61,17 +62,17 @@ class User extends Authenticatable
         return $this->belongsTo('App\Cita','medico');
     }
 
-public function historia(){
+    public function historia(){
 
 
         return $this->hasOne('App\Historia');
 }
 
 
-    public function getAge(){
-        $this->fecha_nac->diff(Carbon::now())
-        ->format('%y years');
-        }
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->attributes['fecha_nac'])->age;
+    }
 
 
 }

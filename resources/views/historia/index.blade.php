@@ -55,10 +55,20 @@ Auth::user('Administrador') as $user--}}
                                     <td>{{$usuario->user->nombre." ".$usuario->user->apellido}}</td>
                                     <td>{{$usuario->doctores->nombre." ".$usuario->doctores->apellido}}</td>
                                     <td>{{$usuario->informe}}</td>
+                                    <td>
+                                    @foreach($usuario->cita() as $cita)
+                                    <td>{{$cita->medicina_1}}</td>
+                                    @endforeach
+                                    </td>
 
 
 
+                                        <td><a href="{{url('/historias/'.$usuario->id)}}" class="btn btn-primary">
+                                                <!--i.glaphicon.glaphicon-edit-->
+                                                <i class="fa fa-edit"></i>
+                                            </a>
 
+                                        </td>
                                     <td><a href="{{url('/historias/'.$usuario->id.'/edit')}}" class="btn btn-primary">
                                             <!--i.glaphicon.glaphicon-edit-->
                                             <i class="fa fa-edit"></i>

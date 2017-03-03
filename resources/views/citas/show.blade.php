@@ -15,7 +15,7 @@
                                 <label for="fecha" class="col-md-4 control-label">fecha</label>
 
                                 <div class="col-md-6">
-                                    <input id="fecha" type="text" class="form-control" name="fecha" value="{{ $cita->fecha or old('fecha') }}" required autofocus>
+                                    <input id="fecha" type="text" class="form-control" name="fecha" value="{{ $usuario->fecha}}" readonly>
 
                                     @if ($errors->has('fecha'))
                                         <span class="help-block">
@@ -28,11 +28,7 @@
                             <div class="form-group{{$errors->has('paciente') ? 'has-error' : ''}}">
                                 <label for="paciente" class="col-md-4 control-label">paciente</label>
                                 <div class="col-md-6">
-                                    <select name="paciente" id="paciente" class="form-control" >
-                                        @foreach($usuario as $usuario)
-                                            <option value="{{$usuario->id}}" @if($usuario->id == $cita->user->id)selected @endif>{{$usuario->nombre." ".$usuario->apellido}}</option>
-                                        @endforeach
-                                    </select>
+                                    <input id="paciente" type="text" class="form-control" name="paciente" value="{{ $usuario->user->nombre." ".$usuario->user->apellido }}" readonly>
                                     @if($errors->has('paciente'))
                                         <span class="help-block"></span>
                                         <strong>{{$errors->first('paciente')}}</strong>
@@ -59,11 +55,7 @@
                             <div class="form-group{{$errors->has('especialidad') ? 'has-error' : ''}}">
                                 <label for="usuario" class="col-md-4 control-label">Especialidad</label>
                                 <div class="col-md-6">
-                                    <select name="especialidad" id="especialidad" class="form-control" >
-                                        @foreach($especialidad as $especialidad)
-                                            <option value="{{$especialidad->id}}" @if($especialidad->descripcion == $cita->especial->descripcion)Selected @endif>{{$especialidad->descripcion}}</option>
-                                        @endforeach
-                                    </select>
+                                    <input id="paciente" type="text" class="form-control" name="paciente" value="{{ $usuario->especial->descripcion}}" readonly>
                                     @if($errors->has('especialidad'))
                                         <span class="help-block"></span>
                                         <strong>{{$errors->first('especialidad')}}</strong>
@@ -74,17 +66,28 @@
                     <div class="form-group{{$errors->has('medico') ? 'has-error' : ''}}">
                         <label for="medico" class="col-md-4 control-label">medico</label>
                         <div class="col-md-6">
-                            <select name="medico" id="medico" class="form-control" >
-                                @foreach($medico as $medico)
-                                    <option value="{{$medico->id}}" @if($medico->nombre == $cita->doctor->nombre) selected @endif>{{$medico->nombre." ".$medico->apellido}}</option>
-                                @endforeach
-                            </select>
+                            <input id="paciente" type="text" class="form-control" name="paciente" value="{{ $usuario->user->nombre." ".$usuario->user->apellido }}" readonly>
                             @if($errors->has('medico'))
                                 <span class="help-block"></span>
                                 <strong>{{$errors->first('medico')}}</strong>
                             @endif
                         </div>
                     </div>
+
+                            <div class="form-group{{$errors->has('observaciones') ? 'has-error' : ''}}">
+                                <label for="medico" class="col-md-4 control-label">Observaciones</label>
+                                <div class="col-md-6">
+                                                <textarea name="observaciones" id="observaciones" cols="10" rows="2"
+                                                          class="form-control" readonly>{{$usuario->observaciones}}</textarea>
+                                    @if($errors->has('medico'))
+                                        <span class="help-block"></span>
+                                        <strong>{{$errors->first('medico')}}</strong>
+
+                                        $user->hasRole('medico')
+                                    @endif
+                                </div>
+                            </div>
+
 
 
 

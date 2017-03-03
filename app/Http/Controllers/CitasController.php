@@ -64,6 +64,7 @@ class CitasController extends Controller
             'fecha'=>'max:255',
             'paciente'=>'required',
             'status'=>'max:255',
+            'observaciones'=>'required:255',
             'especialidad'=>'required',
             'medico'=>'required|max:50',
 
@@ -81,6 +82,7 @@ class CitasController extends Controller
             'fecha'=>$request->input('fecha'),
             'usuario'=>$request->input('paciente'),
             'status'=>$request->input('estatus'),
+            'observaciones'=>$request->input('observaciones'),
             'especialidad'=>$request->input('especialidad'),
             'medico'=>$request->input('medico'),
 
@@ -106,7 +108,11 @@ class CitasController extends Controller
      */
     public function show($id)
     {
-        //
+        $especial = Especialidad::all();
+        $cita = Cita::findOrfail($id);
+        return view ('citas.show',['usuario'=>$cita,'especialidades'=>$especial]);
+
+
     }
 
     /**
@@ -143,6 +149,7 @@ class CitasController extends Controller
             'fecha'=>'max:255',
             'paciente'=>'required',
             'status'=>'max:255',
+            'observaciones'=>'required|max:255',
             'especialidad'=>'required',
             'medico'=>'required|max:50',
 
@@ -160,6 +167,7 @@ class CitasController extends Controller
             'fecha'=>$request->input('fecha'),
             'usuario'=>$request->input('paciente'),
             'status'=>$request->input('estatus'),
+            'observaciones'=>$request->input('observaciones'),
             'especialidad'=>$request->input('especialidad'),
             'medico'=>$request->input('medico'),
 

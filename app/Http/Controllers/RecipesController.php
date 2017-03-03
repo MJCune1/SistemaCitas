@@ -114,11 +114,12 @@ class RecipesController extends Controller
      */
     public function edit($id)
     {
+        $usuarios = User::role('farmaceuta')->get();
         $recipe = Recipe::findOrfail($id);
         $historias = Historia::all();
         $medicos = User::role('medico')->get();
         $pacientes = User::role('paciente')->get();
-        return view ('recipes.edit',['pacientes'=>$pacientes,'recipe'=>$recipe]);
+        return view ('recipes.edit',['pacientes'=>$pacientes,'recipe'=>$recipe,'usuarios'=>$usuarios]);
     }
 
     /**

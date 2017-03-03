@@ -26,16 +26,37 @@ class LoginController extends Controller
      * @var string
      */
 
-
     protected $redirectTo = '/home';
+    /*
 
-    /**
+    public function index(){}
+ protected function redirectTo()
+    {
+$user=Auth::user;
+        switch ($user) {
+            case 0:
+                echo "i es igual a 0";
+                break;
+            case 1:
+                echo "i es igual a 1";
+                break;
+            case 2:
+                echo "i es igual a 2";
+                break;
+        }
+        return '/path';
+
+*/
+
+/**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
     {
+
+
         $this->middleware('guest', ['except' => 'logout']);
     }
 }

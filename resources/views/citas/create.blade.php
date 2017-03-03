@@ -85,6 +85,19 @@
                             @endif
                         </div>
                     </div>
+                            <div class="form-group{{$errors->has('observaciones') ? 'has-error' : ''}}">
+                                <label for="informe" class=" col-md-4 control-label">Motivo</label>
+                                <div class="col-md-6">
+            <textarea name="observaciones" id="observaciones" cols="10" rows="2"
+                      class="form-control">{{$cita->observaciones or  old('observaciones')}}</textarea>
+
+                                    @if($errors->has('observaciones'))
+                                        <span class="help-block"></span>
+                                        <strong>{{$errors->first('observaciones')}}</strong>
+                                    @endif
+                                </div>
+                            </div>
+
 
 
 

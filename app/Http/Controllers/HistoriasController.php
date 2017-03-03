@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cita;
 use App\Historia;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,8 +21,10 @@ class HistoriasController extends Controller
         if(!Auth::user()->hasRole('medico'))
             if(!Auth::user()->hasRole('administrador'))
                 abort(503, 'Acceso Prohibido');
-        $historias = Historia::all();
-        return view('historia.index',['historias'=>$historias]);
+        $id = Auth::user()->id;
+
+        $historia= Historia::where('medico', $id)->get();
+        return view('historia.index',['historias'=>$historia]);
     }
 
     /**
@@ -96,7 +99,9 @@ class HistoriasController extends Controller
      */
     public function show($id)
     {
-        //
+
+  $citas= Cita::where('historia_id',$id)->get();
+  return view ('historia.show', ['usuario'=>$citas]);
     }
 
     /**

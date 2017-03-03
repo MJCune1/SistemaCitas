@@ -7,15 +7,15 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Crear Usuario</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/usuarios') }}">
-                            {{ csrf_field('POST')}}
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/usuarios/'.$usuario->id) }}">
+                            {{ method_field('PUT')}}
                             {{ csrf_field()}}
 
                             <div class="form-group{{ $errors->has('nombre') ? ' has-error' : '' }}">
                                 <label for="nombre" class="col-md-4 control-label">Nombre</label>
 
                                 <div class="col-md-6">
-                                    <input id="nombre" type="text" class="form-control" name="nombre" value="{{ old('nombre') }}" required autofocus>
+                                    <input id="nombre" type="text" class="form-control" name="nombre" value="{{ $usuario->nombre or old('nombre') }}" required autofocus>
 
                                     @if ($errors->has('nombre'))
                                         <span class="help-block">
@@ -29,7 +29,7 @@
                                 <label for="name" class="col-md-4 control-label">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="apellido" type="text" class="form-control" name="apellido" value="{{ old('apellido') }}" required autofocus>
+                                    <input id="apellido" type="text" class="form-control" name="apellido" value="{{ $usuario->apellido or old('apellido') }}" required autofocus>
 
                                     @if ($errors->has('apellido'))
                                         <span class="help-block">
@@ -42,7 +42,7 @@
                                 <label for="cedula" class="col-md-4 control-label">Cedula</label>
 
                                 <div class="col-md-6">
-                                    <input id="cedula" type="text" class="form-control" name="cedula" value="{{ old('cedula') }}" required autofocus>
+                                    <input id="cedula" type="text" class="form-control" name="cedula" value="{{$usuario->cedula or old('cedula') }}" required autofocus>
 
                                     @if ($errors->has('cedula'))
                                         <span class="help-block">
@@ -55,7 +55,7 @@
                                 <label for="fecha_nac" class="col-md-4 control-label">Edad</label>
 
                                 <div class="col-md-6">
-                                    <input id="fecha_nac" type="text" class="form-control" name="fecha_nac" value="{{ old('fecha_nac') }}" required autofocus>
+                                    <input id="fecha_nac" type="text" class="form-control" name="fecha_nac" value="{{$usuario->fecha_nac or old('fecha_nac') }}" required autofocus>
 
                                     @if ($errors->has('fecha_nac'))
                                         <span class="help-block">
@@ -68,7 +68,7 @@
                                 <label for="direccion" class="col-md-4 control-label">Direccion</label>
 
                                 <div class="col-md-6">
-                                    <input id="direccion" type="text" class="form-control" name="direccion" value="{{ old('direccion') }}" required autofocus>
+                                    <input id="direccion" type="text" class="form-control" name="direccion" value="{{ $usuario->direccion or old('direccion') }}" required autofocus>
 
                                     @if ($errors->has('direccion'))
                                         <span class="help-block">
@@ -81,7 +81,7 @@
                                 <label for="telefono" class="col-md-4 control-label">Telefono</label>
 
                                 <div class="col-md-6">
-                                    <input id="telefono" type="text" class="form-control" name="telefono" value="{{ old('telefono') }}" required autofocus>
+                                    <input id="telefono" type="text" class="form-control" name="telefono" value="{{ $usuario->telefono or old('telefono') }}" required autofocus>
 
                                     @if ($errors->has('telefono'))
                                         <span class="help-block">
@@ -94,7 +94,7 @@
                                 <label for="celular" class="col-md-4 control-label">Celular</label>
 
                                 <div class="col-md-6">
-                                    <input id="celular" type="text" class="form-control" name="celular" value="{{ old('celular') }}" required autofocus>
+                                    <input id="celular" type="text" class="form-control" name="celular" value="{{ $usuario->celular or old('celular') }}" required autofocus>
 
                                     @if ($errors->has('celular'))
                                         <span class="help-block">
@@ -106,8 +106,8 @@
 
                             <div class="form-group{{ $errors->has('sexo') ? ' has-error' : '' }}">
                                 <label for="sexo" class="col-md-4 control-label">Sexo</label>
-                                <label class="radio-inline" style="margin-left:2%;"><input type="radio" name="sexo" value="femenino">F</label>
-                                <label class="radio-inline"><input type="radio" name="sexo" value="masculino">M</label>
+                                <label class="radio-inline" style="margin-left:2%;"><input type="radio" name="sexo" value="femenino" @if($usuario->sexo == "femenino") checked @endif>F</label>
+                                <label class="radio-inline"><input type="radio" name="sexo" value="masculino" @if($usuario->sexo == "masculino") checked @endif>M</label>
                                 @if ($errors->has('sexo'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('sexo') }}</strong>
@@ -119,7 +119,7 @@
                                 <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                    <input id="email" type="email" class="form-control" name="email" value="{{ $usuario->email or old('email') }}" required>
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
@@ -133,7 +133,7 @@
                                 <label for="password" class="col-md-4 control-label">Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
+                                    <input id="password" type="password" class="form-control" name="password">
 
                                     @if ($errors->has('password'))
                                         <span class="help-block">
@@ -148,7 +148,7 @@
                                 <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
                                 </div>
                             </div>
 
@@ -159,7 +159,7 @@
                                         <select name="role" id="role" class="form-control" >
 
                                             @foreach($roles as $role)
-                                                <option value="{{$role->name}}">{{$role->name}}</option>
+                                                <option value="{{$role->name}}" @if($usuario->hasRole($role->name)) selected @endif>{{$role->name}}</option>
                                             @endforeach
                                         </select>
                                         @if($errors->has('role'))

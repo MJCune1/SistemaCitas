@@ -90,6 +90,21 @@
                             </div>
                         @endhasrole
 
+                            <div class="form-group{{$errors->has('medico') ? 'has-error' : ''}}">
+                                <label for="medico" class="col-md-4 control-label">Medico</label>
+                                <div class="col-md-6">
+                                    <se  required readonly>
+
+                                            <input name="farmaceuta" id="farmaceuta" class="form-control" value="{{Auth::user()->nombre." ".Auth::user()->apellido}}" readonly/>
+
+
+                                    @if($errors->has('medico'))
+                                        <span class="help-block"></span>
+                                        <strong>{{$errors->first('medico')}}</strong>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{$errors->has('observaciones') ? 'has-error' : ''}}">
                                 <label for="observaciones" class=" col-md-4 control-label">Observaciones</label>
                                 <div class="col-md-6">

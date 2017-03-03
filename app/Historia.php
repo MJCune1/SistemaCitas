@@ -20,4 +20,9 @@ class Historia extends Model
 
         return $this->belongsTo('App\User','medico');
     }
+
+    public function cita(){
+
+        return $this->belongsTo('App\Cita','historia_id');
+    }
 }

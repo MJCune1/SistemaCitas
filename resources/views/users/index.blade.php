@@ -51,7 +51,7 @@ Auth::user('Administrador') as $user--}}
                             @foreach($usuarios as $usuario)
                                 <tr>
                                     <td>{{$usuario->nombre." ".$usuario->apellido}}</td>
-                                    <td>{{$usuario->fecha_nac}}</td>
+                                    <td>{{$usuario->age}}</td>
                                     <td>{{$usuario->email}}</td>
                                     <td>{{$usuario->roles[0]->name}}</td>
 

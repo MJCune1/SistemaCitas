@@ -144,7 +144,11 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $roles = Role::all();
+        $usuario = User::findOrfail($id);
+        $espe = Especialidad::all();
+        return view ('users.edit', ['usuario'=>$usuario,'roles'=>$roles,'espe'=>$espe ]);
+
     }
 
     /**
@@ -156,6 +160,75 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $v = Validator::make($request->All(), [
+
+
+            'nombre' => 'required|max:50',
+            'apellido' => 'required|max:50',
+            'fecha_nac'=>'required',
+            'direccion'=>'required|max:250',
+            'sexo'=>'required',
+            'cedula' => 'required|max:8|unique:users,cedula,'.$id.'id',
+            'telefono' => 'max:255',
+            'celular' => 'max:255',
+            'email' => 'required|email|max:255|unique:users,email,'.$id.'id',
+            'password' => 'min:6|confirmed',
+            'role' => 'required',
+            'especialidad'=>'required'
+
+
+
+
+        ]);
+
+        if ($v->fails()) {
+
+            return redirect()->back()->withErrors($v)->withInput();
+
+        }
+
+
+        $user = User::findOrFail($id);
+        $user->update([
+
+            'nombre'=>$request->input('nombre'),
+            'fecha_nac'=>$request->input('fecha_nac'),
+            'direccion'=>$request->input('direccion'),
+            'sexo'=>$request->input('sexo'),
+            'apellido'=>$request->input('apellido'),
+            'cedula'=>$request->input('cedula'),
+            'telefono'=>$request->input('telefono'),
+            'celular'=>$request->input('celular'),
+            'email'=>$request->input('email'),
+            'especialidad_id'=>$request->input('especialidad'),
+
+
+        ]);
+
+
+        if ($request->input('password')) {
+            $v = Validator::make($request->all(), [
+
+                'password' => 'min:6|confirmed',
+            ]);
+            if ($v->fails()) {
+
+                return redirect()->back()->withErrors()->withInput();
+            }
+
+            $user->update([
+
+                'password' => bcrypt($request->input('password')),
+            ]);
+        }
+
+        //  $user->removeRole(Role::all());
+        // $user->assignRole($request->input('role'));
+        $user->syncRoles($request->input('role'));
+
+
+        return redirect('/usuarios')->with('mensaje' , 'Usuario actualizado con exito');
+
         //
     }
 
