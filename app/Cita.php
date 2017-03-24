@@ -33,9 +33,6 @@ class Cita extends Model
 
 
 
-
-
-
     public function ScopeId($query, $id){
 
         
@@ -49,6 +46,12 @@ class Cita extends Model
 
         return $query->where('status','=','pendiente');
 
+
+    }
+
+    public function historia(){
+
+        return $this->belongsTo('App\Historia','historia_id');
 
     }
 

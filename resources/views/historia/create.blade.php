@@ -11,6 +11,21 @@
                             {{ csrf_field('POST')}}
                             {{ csrf_field()}}
 
+
+                            <div class="form-group{{ $errors->has('fecha_ingreso') ? ' has-error' : '' }}">
+                                <label for="date" class="col-md-4 control-label">Fecha de entrega</label>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="fecha_ingreso" value="">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                        @if ($errors->has('fecha_ingreso'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('fecha_ingreso') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group{{$errors->has('paciente') ? 'has-error' : ''}}">
                                 <label for="paciente" class="col-md-4 control-label">Paciente</label>
                                 <div class="col-md-6">

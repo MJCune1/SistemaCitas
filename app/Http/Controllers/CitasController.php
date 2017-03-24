@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Especialidad;
+use App\Historia;
 use App\User;
 use Illuminate\Http\Request;
 use Validator;
@@ -38,11 +39,11 @@ class CitasController extends Controller
         if(!Auth::user()->hasRole('secretaria'))
             if(!Auth::user()->hasRole('administrador'))
                 abort(503, 'Acceso Prohibido');
-
+        $historia = Historia::all();
         $especialidad = Especialidad::All();
         $medicos = User::role('medico')->get();
         $usuarios = User::role('paciente')->get();
-        return view('citas.create', ['usuario'=>$usuarios,'medico'=>$medicos, 'especialidad'=>$especialidad]);
+        return view('citas.create', ['usuario'=>$usuarios,'medico'=>$medicos, 'especialidad'=>$especialidad, 'historias'=>$historia]);
     }
 
     /**
@@ -85,6 +86,7 @@ class CitasController extends Controller
             'observaciones'=>$request->input('observaciones'),
             'especialidad'=>$request->input('especialidad'),
             'medico'=>$request->input('medico'),
+            'historia_id'=>$request->input('historia')
 
 
         ]);
@@ -123,13 +125,13 @@ class CitasController extends Controller
      */
     public function edit($id)
     {
-        $pacientes = User::all();
+        $historia = Historia::all();
+        $usuario = User::all();
         $cita = Cita::findOrFail($id);
         $especialidad = Especialidad::all();
-        $medicos = User::role('medico')->get();
-        return view('citas.edit', ['cita'=>$cita, 'usuario'=>$pacientes, 'especialidad'=>$especialidad, 'medico'=>$medicos]);
+        $medico = User::role('medico')->get();
+        return view('citas.edit', compact('cita','usuario','especialidad','medico','historia'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -139,6 +141,7 @@ class CitasController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         if(!Auth::user()->hasRole('secretaria'))
             if(!Auth::user()->hasRole('administrador'))
                 abort(503, 'Acceso Prohibido');
@@ -152,6 +155,7 @@ class CitasController extends Controller
             'observaciones'=>'required|max:255',
             'especialidad'=>'required',
             'medico'=>'required|max:50',
+            'historia'=>'required'
 
         ]);
 
@@ -161,8 +165,8 @@ class CitasController extends Controller
         }
 
 
-
-        $cita=Cita::create([
+        $cita = Cita::findOrFail($id);
+        $cita->update([
 
             'fecha'=>$request->input('fecha'),
             'usuario'=>$request->input('paciente'),
@@ -170,6 +174,7 @@ class CitasController extends Controller
             'observaciones'=>$request->input('observaciones'),
             'especialidad'=>$request->input('especialidad'),
             'medico'=>$request->input('medico'),
+            'historia_id'=>$request->input('historia'),
 
 
         ]);

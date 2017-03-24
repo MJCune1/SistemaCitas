@@ -12,16 +12,17 @@
                             {{ csrf_field()}}
 
                             <div class="form-group{{ $errors->has('fecha') ? ' has-error' : '' }}">
-                                <label for="fecha" class="col-md-4 control-label">fecha</label>
-
+                                <label for="date" class="col-md-4 control-label">Fecha</label>
                                 <div class="col-md-6">
-                                    <input id="fecha" type="text" class="form-control" name="fecha" value="{{ old('fecha') }}" required autofocus>
-
-                                    @if ($errors->has('fecha'))
-                                        <span class="help-block">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control datepicker" name="fecha" value="">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                        @if ($errors->has('fecha'))
+                                            <span class="help-block">
                                         <strong>{{ $errors->first('fecha') }}</strong>
                                     </span>
-                                    @endif
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
 
@@ -30,12 +31,27 @@
                                 <div class="col-md-6">
                                     <select name="paciente" id="paciente" class="form-control" >
                                         @foreach($usuario as $usuario)
-                                            <option value="{{$usuario->id}}">{{$usuario->nombre}}</option>
+                                            <option value="{{$usuario->id}}">{{$usuario->nombre." ".$usuario->apellido}}</option>
                                         @endforeach
                                     </select>
                                     @if($errors->has('paciente'))
                                         <span class="help-block"></span>
                                         <strong>{{$errors->first('paciente')}}</strong>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{$errors->has('historia') ? 'has-error' : ''}}">
+                                <label for="paciente" class="col-md-4 control-label">Agregar a historia</label>
+                                <div class="col-md-6">
+                                    <select name="historia" id=historia" class="form-control" required>
+                                        @foreach($historias as $usuario)
+                                            <option value="{{$usuario->id}}">{{"Historia N°: ".$usuario->id." |  de ".$usuario->user->nombre." ".$usuario->user->apellido}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->has('historia'))
+                                        <span class="help-block"></span>
+                                        <strong>{{$errors->first('historia')}}</strong>
                                     @endif
                                 </div>
                             </div>
@@ -76,7 +92,7 @@
                         <div class="col-md-6">
                             <select name="medico" id="medico" class="form-control" >
                                 @foreach($medico as $medico)
-                                    <option value="{{$medico->id}}">{{$medico->nombre}}</option>
+                                    <option value="{{$medico->id}}">{{$medico->nombre." ".$medico->apellido}}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('medico'))

@@ -23,6 +23,6 @@ class Historia extends Model
 
     public function cita(){
 
-        return $this->belongsTo('App\Cita','historia_id');
+        return $this->hasOne('App\Cita','historia_id');
     }
 }

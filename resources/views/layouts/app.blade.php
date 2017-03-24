@@ -4,6 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    <!-- Jquery -->
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Datepicker Files -->
+    <link rel="stylesheet" href="{{asset('datepicker/css/bootstrap-datepicker3.css')}}">
+    <link rel="stylesheet" href="{{asset('datepicker/css/bootstrap-standalone.css')}}">
+    <script src="{{asset('datepicker/js/bootstrap-datepicker.js')}}"></script>
+    <!-- Languaje -->
+    <script src="{{asset('datepicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
+
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -106,7 +116,14 @@
 
         @yield('content')
     </div>
+    <script>
 
+        {{--a la clase(css) datepicker le agrego la clase .datepicker --}}
+        $('.datepicker').datepicker({
+            todayHighlight: true,
+            format: "yyyy/mm/dd"
+        });
+    </script>
     <!-- Scripts -->
     <script src="/js/app.js"></script>
     <script type="application/javascript">
@@ -115,6 +132,8 @@
             $(this).find('.nombre').text($(e.relatedTarget).data('name'));
         });
     </script>
+
+
 
 </body>
 </html>

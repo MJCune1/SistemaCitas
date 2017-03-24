@@ -100,8 +100,9 @@ class HistoriasController extends Controller
     public function show($id)
     {
 
+        $historia = Historia::findOrfail($id);
   $citas= Cita::where('historia_id',$id)->get();
-  return view ('historia.show', ['usuario'=>$citas]);
+  return view ('historia.show', ['usuario'=>$citas,'historia'=>$historia]);
     }
 
     /**

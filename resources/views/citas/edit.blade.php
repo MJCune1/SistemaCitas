@@ -7,8 +7,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Registro de Citas</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/citas') }}">
-                            {{ csrf_field('POST')}}
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/citas/'.$cita->id) }}">
+                            {{ method_field('PUT')}}
                             {{ csrf_field()}}
 
                             <div class="form-group{{ $errors->has('fecha') ? ' has-error' : '' }}">
@@ -75,8 +75,8 @@
                         <label for="medico" class="col-md-4 control-label">medico</label>
                         <div class="col-md-6">
                             <select name="medico" id="medico" class="form-control" >
-                                @foreach($medico as $medico)
-                                    <option value="{{$medico->id}}" @if($medico->nombre == $cita->doctor->nombre) selected @endif>{{$medico->nombre." ".$medico->apellido}}</option>
+                                @foreach($medico as $medicos)
+                                    <option value="{{$medicos->id}}" @if($medicos->nombre == $cita->doctor->nombre) selected @endif>{{$medicos->nombre." ".$medicos->apellido}}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('medico'))
@@ -85,18 +85,35 @@
                             @endif
                         </div>
                     </div>
+                            <div class="form-group{{$errors->has('observaciones') ? 'has-error' : ''}}">
+                                <label for="informe" class=" col-md-4 control-label">Motivo</label>
+                                <div class="col-md-6">
+            <textarea name="observaciones" id="observaciones" cols="10" rows="2"
+                      class="form-control">{{$cita->observaciones or  old('observaciones')}}</textarea>
+
+                                    @if($errors->has('observaciones'))
+                                        <span class="help-block"></span>
+                                        <strong>{{$errors->first('observaciones')}}</strong>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{$errors->has('historia') ? 'has-error' : ''}}">
+                                <label for="paciente" class="col-md-4 control-label">Agregar a historia</label>
+                                <div class="col-md-6">
+                                    <select name="historia" id=historia" class="form-control" required>
+                                        @foreach($historia as $usuario)
+                                            <option value="{{$usuario->id}}" @if($usuario->id == $cita->historia->id) selected @endif>{{"Historia N°: ".$usuario->id." |  de ".$usuario->user->nombre." ".$usuario->user->apellido}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if($errors->has('historia'))
+                                        <span class="help-block"></span>
+                                        <strong>{{$errors->first('historia')}}</strong>
+                                    @endif
+                                </div>
+                            </div>
 
 
-
-                            <!--
-                            Cita
-                            especialidad
-                            medico
-                            fecha
-                            paciente
-                            estatus
-                            ($user->role('medico') as $medico)
-                            -->
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">

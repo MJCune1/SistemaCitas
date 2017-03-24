@@ -38,7 +38,25 @@
 POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
                         </a>
 
-                        <table class="table table-bordered">
+                        <table style="margin-top: 1%;" class="table table-bordered">
+
+                            <tr>
+                                <th colspan="5">Informe Completo</th>
+
+                            </tr>
+                            <tr>
+                                <td colspan="5" >
+                                    <div class="form-group{{$errors->has('informe') ? 'has-error' : ''}}">{{$historia->informe or  old('informe')}}
+
+                                            @if($errors->has('informe'))
+                                                <span class="help-block"></span>
+                                                <strong>{{$errors->first('informe')}}</strong>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                </td>
+                            </tr>
                             <tr>
                                 <th>Paciente</th>
                                 <th>Doctor</th>

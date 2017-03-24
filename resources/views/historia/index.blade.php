@@ -38,12 +38,10 @@
 POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
                         </a>
 
-                        <table class="table table-bordered">
+                        <table style="margin-top: 1%;" class="table table-bordered">
                             <tr>
                                 <th>Paciente</th>
                                 <th>Doctor</th>
-                                <th>Informe</th>
-
 
                                 <th colspan="3" width="10%">Acciones</th>
                             </tr>
@@ -54,13 +52,6 @@ Auth::user('Administrador') as $user--}}
                                 <tr>
                                     <td>{{$usuario->user->nombre." ".$usuario->user->apellido}}</td>
                                     <td>{{$usuario->doctores->nombre." ".$usuario->doctores->apellido}}</td>
-                                    <td>{{$usuario->informe}}</td>
-                                    <td>
-                                    @foreach($usuario->cita() as $cita)
-                                    <td>{{$cita->medicina_1}}</td>
-                                    @endforeach
-                                    </td>
-
 
 
                                         <td><a href="{{url('/historias/'.$usuario->id)}}" class="btn btn-primary">

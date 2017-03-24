@@ -83,7 +83,6 @@
                                         <span class="help-block"></span>
                                         <strong>{{$errors->first('medico')}}</strong>
 
-                                        $user->hasRole('medico')
                                     @endif
                                 </div>
                             </div>

@@ -35,7 +35,7 @@
 POST REDIRECCIONA PORQUE EJECUTA LA MISMA ACCION--}}
                         </a>
 
-                        <table class="table table-bordered">
+                        <table style="margin-top: 1%;" class="table table-bordered">
                             <tr>
                                 <th>Nombre</th>
                                 <th>Edad</th>

@@ -16,7 +16,6 @@
 
                                 <div class="col-md-6">
                                     <input id="fecha_emision" type="text" class="form-control" name="fecha_emision" value="{{ $recipe->fecha_emision or old('fecha_emision') }}" required autofocus readonly>
-
                                     @if ($errors->has('fecha_emision'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('fecha_emision') }}</strong>
@@ -24,21 +23,23 @@
                                     @endif
                                 </div>
                             </div>
-                            @hasrole('farmaceuta')
+
                             <div class="form-group{{ $errors->has('fecha_entrega') ? ' has-error' : '' }}">
-                                <label for="fecha_entrega" class="col-md-4 control-label">fecha entrega</label>
-
+                                <label for="date" class="col-md-4 control-label">Fecha de entrega</label>
                                 <div class="col-md-6">
-                                    <input id="fecha_entrega" type="text" class="form-control" name="fecha_entrega" value="{{ old('fecha_entrega') }}" autofocus>
-
+                                <div class="input-group">
+                                    <input type="text" class="form-control datepicker" name="fecha_entrega" value="{{$recipe->fecha_entrega}}" readonly>
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                                     @if ($errors->has('fecha_entrega'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('fecha_entrega') }}</strong>
                                     </span>
                                     @endif
                                 </div>
+                                </div>
                             </div>
-                            @endhasrole
+
+
                     {{--<div class="form-group{{ $errors->has('paciente') ? ' has-error' : '' }}">
                                 <label for="fecha_entrega" class="col-md-4 control-label">fecha entrega</label>
 
@@ -68,27 +69,17 @@
                                     @endif
                                 </div>
                             </div>--}}
-
-
-
-
-                    @hasrole('farmaceuta');
                             <div class="form-group{{$errors->has('estatus') ? 'has-error' : ''}}">
                                 <label for="estatus" class="col-md-4 control-label">Estatus</label>
                                 <div class="col-md-6">
-                                    <select name="estatus" id="estatus" class="form-control" >
-                                            <option value="pendiente" @if($recipe->status == "pendiente")selected @endif>pendiente</option>
-                                            <option value="entregado" @if($recipe->status == "entregado")selected @endif>entregado</option>
-
-
-                                    </select>
+                                    <input name="farmaceuta" id="farmaceuta" class="form-control" value="{{$recipe->status}}" readonly/>
                                     @if($errors->has('estatus'))
                                         <span class="help-block"></span>
                                         <strong>{{$errors->first('estatus')}}</strong>
                                     @endif
                                 </div>
                             </div>
-                        @endhasrole
+
 
                             <div class="form-group{{$errors->has('medico') ? 'has-error' : ''}}">
                                 <label for="medico" class="col-md-4 control-label">Medico</label>
